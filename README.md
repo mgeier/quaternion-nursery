@@ -1,0 +1,35 @@
+Quaternion Notes
+================
+
+Andrew J. Hanson:
+Visualizing Quaternions
+
+Ken Shoemake:
+Animating Rotation with Quaternion Curves
+
+Myoung-Jun Kim,  Myung-Soo Kim, and Sung Yong Shin:
+A General Construction Scheme for Unit Quaternion Curves
+with Simple High Order Derivatives
+
+antipodality!
+
+David Eberly, Geometric Tools:
+Quaternion Algebra and Calculus,
+https://www.geometrictools.com/
+
+SLERP
+-----
+
+https://en.wikipedia.org/wiki/Slerp
+
+NLERP
+-----
+
+normalized linear interpolation
+
+"gives good results if the interpolated quaternions are reasonably close (difference of about 60 to 90 degrees is still fine) while being very simple and fast"
+
+SQUAD
+-----
+
+
