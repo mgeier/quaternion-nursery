@@ -17,6 +17,21 @@ David Eberly, Geometric Tools:
 Quaternion Algebra and Calculus,
 https://www.geometrictools.com/
 
+Schlag
+
+Python Libs
+-----------
+
+https://github.com/moble/quaternion
+
+https://quaternion.readthedocs.io/en/latest/README.html
+
+https://github.com/KieranWynn/pyquaternion
+
+https://kieranwynn.github.io/pyquaternion/
+
+https://pyrr.readthedocs.io/en/latest/api_quaternion.html
+
 SLERP
 -----
 
@@ -32,4 +47,4 @@ normalized linear interpolation
 SQUAD
 -----
 
-
+"spherical quadrangle interpolation"
