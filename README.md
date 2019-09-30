@@ -19,6 +19,8 @@ https://www.geometrictools.com/
 
 Schlag
 
+"Explorable Videos": https://eater.net/quaternions
+
 Python Libs
 -----------
 
