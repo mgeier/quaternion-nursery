@@ -55,3 +55,14 @@ SQUAD
 -----
 
 "spherical quadrangle interpolation"
+
+Quaternion Splines
+------------------
+
+http://qspline.sourceforge.net/
+
+http://qspline.sourceforge.net/qspline.pdf
+
+SciPy: https://github.com/scipy/scipy/pull/9831
+
+https://github.com/scipy/scipy/files/2932755/attitude_interpolation.pdf
