@@ -21,6 +21,11 @@ Schlag
 
 "Explorable Videos": https://eater.net/quaternions
 
+commutative, constant velocity, torque-minimal?
+
+quaternion slerp vs. quaternion nlerp vs. log-quaternion lerp:
+http://number-none.com/product/Understanding%20Slerp,%20Then%20Not%20Using%20It/
+
 Python Libs
 -----------
 
