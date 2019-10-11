@@ -13,6 +13,9 @@ with Simple High Order Derivatives
 
 antipodality!
 
+interpolation: short way vs. long way?
+if dot product < 0: long way, negate one input
+
 David Eberly, Geometric Tools:
 Quaternion Algebra and Calculus,
 https://www.geometrictools.com/
