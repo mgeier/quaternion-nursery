@@ -26,6 +26,8 @@ Schlag
 
 commutative, constant velocity, torque-minimal?
 
+torque-minimal = geodesic?
+
 quaternion slerp vs. quaternion nlerp vs. log-quaternion lerp:
 http://number-none.com/product/Understanding%20Slerp,%20Then%20Not%20Using%20It/
 
@@ -47,12 +49,24 @@ SLERP
 
 https://en.wikipedia.org/wiki/Slerp
 
+torque-minimal path
+
+constant velocity
+
+non-commutative?
+
 NLERP
 -----
 
 normalized linear interpolation
 
 "gives good results if the interpolated quaternions are reasonably close (difference of about 60 to 90 degrees is still fine) while being very simple and fast"
+
+torque-minimal path
+
+non-constant velocity
+
+commutative
 
 SQUAD
 -----
