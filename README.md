@@ -34,7 +34,7 @@ http://number-none.com/product/Understanding%20Slerp,%20Then%20Not%20Using%20It/
 Python Libs
 -----------
 
-https://github.com/moble/quaternion
+https://github.com/moble/quaternion (dtype=quaternion)
 
 https://quaternion.readthedocs.io/en/latest/README.html
 
