@@ -1,5 +1,6 @@
 import math as _math
 
+from IPython.utils.capture import capture_output as _capture_output
 import pythreejs as _three
 
 
@@ -13,7 +14,7 @@ class Ball:
             geometry=_three.SphereGeometry(
                 radius=1,
                 widthSegments=30,
-                heightSegments=15,
+                heightSegments=20,
             ),
             material=_three.MeshLambertMaterial(color='lightgray'),
         )
@@ -73,9 +74,23 @@ class Ball:
         for quaternion in quaternions:
             self.add_arrow(quaternion, **kwargs)
 
-    def show(self):
-        # TODO: proper repr?
-        display(self._renderer)
+    def _repr_mimebundle_(self, include=None, exclude=None):
+        with _capture_output(stdout=False, stderr=False, display=True) as cap:
+            display(self._renderer, include=include, exclude=exclude)
+        # NB: we expect only one output
+        out, = cap.outputs
+        data, metadata = out._repr_mimebundle_(include=include, exclude=exclude)
+        if 'image/png' not in data and 'image/png' not in metadata:
+
+            # TODO: generate PNG screenshot?
+
+            #from ipywebrtc import WidgetStream, ImageRecorder
+            #stream = WidgetStream(widget=self._renderer)
+            #recorder = ImageRecorder(stream=stream, recording=True)
+            #recorder.download()
+            #data['image/png'] = recorder.image.value
+            pass
+        return data, metadata
 
 
 def angles2quaternion(azimuth, elevation, roll):
