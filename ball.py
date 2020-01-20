@@ -70,6 +70,34 @@ class Ball:
         line.quaternion = tuple(quaternion)
         self._scene.add(line)
 
+        vertices = [
+            (0, 1, 0),
+            (-0.02, 1, -0.01),
+            (0, 1, 0.04),
+            (0.02, 1, -0.01),
+            (0, 1, 0),
+        ]
+        line = _three.Line2(
+            _three.LineGeometry(positions=vertices),
+            _three.LineMaterial(color=color, linewidth=linewidth))
+        line.scale = scale, 1, scale
+        line.quaternion = tuple(quaternion)
+        self._scene.add(line)
+
+        vertices = [
+            (1, 0, 0),
+            (1, -0.02, -0.01),
+            (1, 0, 0.04),
+            (1, 0.02, -0.01),
+            (1, 0, 0),
+        ]
+        line = _three.Line2(
+            _three.LineGeometry(positions=vertices),
+            _three.LineMaterial(color=color, linewidth=linewidth))
+        line.scale = 1, scale, scale
+        line.quaternion = tuple(quaternion)
+        self._scene.add(line)
+
     def add_arrows(self, quaternions, **kwargs):
         for quaternion in quaternions:
             self.add_arrow(quaternion, **kwargs)
