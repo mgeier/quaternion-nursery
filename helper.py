@@ -96,28 +96,71 @@ def plot_rotations(rotations):
     # TODO: pass list of lists of quaternions (optionally scipy rotations?)
     # TODO: description/title text for each line of rotations
 
+    shift_x = 12
+    shift_y = -20
 
     # TODO: determine figure size, avoid additional margin
-    fig = plt.figure(figsize=(6, 2))
-    ax = fig.add_axes([0, 0, 1, 1], projection='3d')
-    ax.view_init(azim=-90, elev=90)
-    ax.set_proj_type('ortho')
+    fig = plt.figure(figsize=(6, 3))
+    #fig = plt.figure(figsize=(6, 3), frameon=False)
+    #ax = Axes3D(fig, [0, 0, 1, 1], azim=-90, elev=90, proj_type='ortho')
+    ax = fig.add_axes(
+        [0, 0, 1, 1],
+        projection='3d',
+        azim=-90,
+        elev=90,
+        proj_type='ortho',
+        autoscale_on=False,
+    )
+    ax.disable_mouse_rotation()
     # TODO: determine x/y limits (z can be ignored in ortho projection?)
     # TODO: axis limits same aspect ratio as figure size
     aspect = np.true_divide(*fig.get_size_inches())
-    ax.set_xlim(-5, 25)
-    ax.set_ylim(-5, 5)
+    ax.set_xlim(-15, 45)
+    ax.set_ylim(-25, 5)
     #ax.set_zlim(-5, 5);
+
     ax.set_axis_off()
 
-    polys = np.array(list(faces()))
+    #ax.set_frame_on(False)
+    #ax.set_top_view()
+    #ax.set_autoscale_on(False)
+    #ax.set_clip_on(True)
+    #fig.subplots_adjust(top=1, bottom=0, left=0, right=1)
+    #plt.tight_layout()
+    #fig.tight_layout()
+    #ax.autoscale(tight=True)
+    #ax.autoscale_view(tight=True)
+
+    original_polys = np.array(list(faces()))
 
     ls = LightSource()
 
-    # TODO: go through lines
-    # TODO: go through rotations
-    # TODO: rotate and call plot_polys()
+    y = 5
+    for line in rotations:
+        x = -35
+        for rot in line:
+            if not isinstance(rot, Rotation):
+                rot = Rotation.from_quat(rot, normalized=True)
+            polys = np.array(list(map(rot.apply, original_polys)))
+            polys += [x, y, 0]
+            plot_polys(polys, ax=ax, ls=ls)
+            x += shift_x
+        y += shift_y
 
-    plot_polys(polys, ax=ax, ls=ls)
+    #print(ax.get_axis_position())
+    #print(ax.get_frame_on())
+    #print(ax.get_proj())
+    #print(ax.get_w_lims())
+    #print(ax.get_xlim())
+    #print(ax.get_xlim3d())
+    #print(ax.get_zbound())
+    #print(ax.get_zlim())
+    #print(ax.get_zlim3d())
+    #print(ax.margins())
+    #ax.margins(0)
+    #print(ax.margins())
+
+    #print(ax.get_position())
+    #print(ax.get_aspect())
 
     # TODO: return fig?
