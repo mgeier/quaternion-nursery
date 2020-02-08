@@ -111,6 +111,9 @@ def plot_rotations(rotations):
         proj_type='ortho',
         autoscale_on=False,
     )
+
+    #ax.dist = 6
+
     ax.disable_mouse_rotation()
     # TODO: determine x/y limits (z can be ignored in ortho projection?)
     # TODO: axis limits same aspect ratio as figure size
@@ -119,7 +122,7 @@ def plot_rotations(rotations):
     ax.set_ylim(-25, 5)
     #ax.set_zlim(-5, 5);
 
-    ax.set_axis_off()
+    #ax.set_axis_off()
 
     #ax.set_frame_on(False)
     #ax.set_top_view()
