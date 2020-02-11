@@ -1,8 +1,10 @@
 from functools import partial
 
+from matplotlib import artist
 from matplotlib.colors import LightSource
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.transforms import TransformedBbox
+from mpl_toolkits.mplot3d import Axes3D, proj3d
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import numpy as np
 from scipy.spatial.transform import Rotation
@@ -167,3 +169,75 @@ def plot_rotations(rotations):
     #print(ax.get_aspect())
 
     # TODO: return fig?
+
+
+class DumbAxes3D(Axes3D):
+
+    def __init__(self, figure, *args, **kwargs):
+        super().__init__(figure, *args, **kwargs)
+        self.set_axis_off()
+
+        #self._position = self._originalPosition
+        #self.bbox = TransformedBbox(self._position, figure.transFigure)
+        #self.bbox = TransformedBbox(self._originalPosition, figure.transFigure)
+        #self._set_lim_and_transforms()
+        #self.patch.set_transform(self.transAxes)
+
+        #self._position = self._originalPosition
+        self.set_figure(figure)
+        #self.patch.set_transform(self.transAxes)
+
+        # TODO: deactivate mouse interaction?
+
+    @artist.allow_rasterization
+    def draw(self, renderer):
+        self.patch.draw(renderer)  # background (axes.facecolor)
+
+        xmin, xmax = self.get_xlim3d()
+        ymin, ymax = self.get_ylim3d()
+        zmin, zmax = self.get_zlim3d()
+
+        worldM = proj3d.world_transformation(xmin, xmax,
+                                             ymin, ymax,
+                                             zmin, zmax)
+
+        zfront, zback = -1, 1
+        projM = proj3d.ortho_transformation(zfront, zback)
+
+        Mt = [[1, 0, 0, -0.5],
+              [0, 1, 0, -0.5],
+              [0, 0, 1, -0.5],
+              [0, 0, 0, 1]]
+
+        #self.eye = [0, 0, -0.5]
+        #self.eye = [1, 0, 0]
+        #self.vvec = [0.5, 0.5, 1]
+        #self.vvec = [1, 0, 0]
+        #self.eye = [0, 0, 0.5]
+        #self.vvec = [0, 0, 0]
+        self.vvec = NotImplemented
+        self.eye = NotImplemented
+        #self.M = np.dot(projM, worldM)
+        #self.M = projM @ worldM
+        self.M = worldM
+        #self.M = projM @ Mt @ worldM
+        #self.M = Mt @ worldM
+
+        renderer.M = self.M
+        renderer.vvec = self.vvec
+        renderer.eye = self.eye
+        #renderer.get_axis_position = self.get_axis_position
+        #renderer.vvec = NotImplemented
+        #renderer.eye = NotImplemented
+        renderer.get_axis_position = NotImplemented
+
+        for coll in self.collections:
+            coll.do_3d_projection(renderer)
+        for patch in self.patches:
+            patch.do_3d_projection(renderer)
+
+        super(Axes3D, self).draw(renderer)
+
+    def apply_aspect(self, position=None):
+        #pass
+        super(Axes3D, self).apply_aspect(position=position)
