@@ -22,7 +22,7 @@ def faces():
     west = np.array([[-1,  1,  1], [-1,  1, -1], [-1, -1, -1], [-1, -1,  1]])
     bottom = np.array([[-1,  1, -1], [1,  1, -1], [1, -1, -1], [-1, -1, -1]])
     origin = np.array([0, 0, 0])
-    p = origin + [0, 0, 0]
+    p = origin + [-2, 0, 0]
     yield p + top
     yield p + west
     yield p + bottom
@@ -37,7 +37,7 @@ def faces():
     yield p + bottom
     yield p + south
     yield p + east
-    p = origin + [0, 2, 0]
+    p = origin + [-2, 2, 0]
     yield p + top
     yield p + west
     yield p + bottom
@@ -58,7 +58,7 @@ def faces():
     yield p + bottom
     yield p + south
     yield p + east
-    p = origin + [0, -2, 0]
+    p = origin + [-2, -2, 0]
     yield p + top
     yield p + west
     yield p + bottom
@@ -126,6 +126,27 @@ def plot_rotations(rotations):
     #print(ax.get_position())
 
     # TODO: return fig?
+
+
+def plot_line(rotations, *, ax=None):
+    if ax is None:
+        raise TypeError('TODO: create default axes (and figure?)')
+    shift_x = 12
+
+    ax.set_xlim(-5, 55)
+    ax.set_ylim(-25, 5)
+
+    ls = LightSource()
+
+    x = 0
+    y = 0
+    for rot in rotations:
+        if not isinstance(rot, Rotation):
+            rot = Rotation.from_quat(rot, normalized=True)
+        polys = np.array(list(map(rot.apply, faces())))
+        polys += [x, y, 0]
+        plot_polys(polys, ax=ax, ls=ls)
+        x += shift_x
 
 
 class DumbAxes3D(Axes3D):
