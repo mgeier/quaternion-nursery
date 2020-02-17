@@ -1,9 +1,8 @@
 from functools import partial
 
-from matplotlib import artist
+import matplotlib
 from matplotlib.colors import LightSource
 import matplotlib.pyplot as plt
-from matplotlib.transforms import TransformedBbox
 from mpl_toolkits.mplot3d import Axes3D, proj3d
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import numpy as np
@@ -110,8 +109,6 @@ def plot_rotations(rotations):
     ax.set_xlim(-5, 55)
     ax.set_ylim(-25, 5)
 
-    original_polys = np.array(list(faces()))
-
     ls = LightSource()
 
     y = 0
@@ -120,7 +117,7 @@ def plot_rotations(rotations):
         for rot in line:
             if not isinstance(rot, Rotation):
                 rot = Rotation.from_quat(rot, normalized=True)
-            polys = np.array(list(map(rot.apply, original_polys)))
+            polys = np.array(list(map(rot.apply, faces())))
             polys += [x, y, 0]
             plot_polys(polys, ax=ax, ls=ls)
             x += shift_x
@@ -133,13 +130,19 @@ def plot_rotations(rotations):
 
 class DumbAxes3D(Axes3D):
 
-    def __init__(self, figure, rect=[0, 0, 1, 1]):
+    name = 'dumb3d'
+
+    def __init__(self, figure, rect=[0, 0, 1, 1], sharex=None, sharey=None):
+        if sharex is not None:
+            raise TypeError('sharex not supported')
+        if sharey is not None:
+            raise TypeError('sharey not supported')
         super().__init__(figure, rect=rect)
         self.set_axis_off()
         self.set_figure(figure)
         self.disable_mouse_rotation()
 
-    @artist.allow_rasterization
+    @matplotlib.artist.allow_rasterization
     def draw(self, renderer):
         self.patch.draw(renderer)  # background (axes.facecolor)
         xmin, xmax = self.get_xlim3d()
@@ -165,3 +168,6 @@ class DumbAxes3D(Axes3D):
 
     def apply_aspect(self, position=None):
         super(Axes3D, self).apply_aspect(position=position)
+
+
+matplotlib.projections.register_projection(DumbAxes3D)
