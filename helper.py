@@ -91,62 +91,36 @@ def plot_polys(polys, *, ax=None, ls=None):
     colset = shade_colors(color, generate_normals(polys), ls)
     coll.set_facecolors(colset)
     ax.add_collection3d(coll)
+    return coll
 
 
-def plot_rotations(rotations):
-    # TODO: description/title text for each line of rotations
-
-    shift_x = 12
-    shift_y = -20
-
-    # TODO: determine figure size, avoid additional margin
-    fig = plt.figure(figsize=(6, 3))
-    ax = DumbAxes3D(fig)
-
-    # TODO: determine x/y limits (z can be ignored in ortho projection?)
-    # TODO: axis limits same aspect ratio as figure size
-    aspect = np.true_divide(*fig.get_size_inches())
-    ax.set_xlim(-5, 55)
-    ax.set_ylim(-25, 5)
-
-    ls = LightSource()
-
-    y = 0
-    for line in rotations:
-        x = 0
-        for rot in line:
-            if not isinstance(rot, Rotation):
-                rot = Rotation.from_quat(rot, normalized=True)
-            polys = np.array(list(map(rot.apply, faces())))
-            polys += [x, y, 0]
-            plot_polys(polys, ax=ax, ls=ls)
-            x += shift_x
-        y += shift_y
-
-    #print(ax.get_position())
-
-    # TODO: return fig?
-
-
-def plot_line(rotations, *, ax=None):
+def plot_rotations(rotations, *, ax=None):
     if ax is None:
-        raise TypeError('TODO: create default axes (and figure?)')
-    shift_x = 12
+        ax = plt.gca(projection='dumb3d')
+    object_width = 12
+    shift_x = object_width
 
-    ax.set_xlim(-5, 55)
-    ax.set_ylim(-25, 5)
+    _, _, x1, y1 = ax.bbox.bounds
+    aspect = x1 / y1
+
+    total_width = object_width * len(rotations)
+    total_height = total_width / aspect
+    ax.set_xlim(0, total_width)
+    ax.set_ylim(0, total_height)
 
     ls = LightSource()
 
-    x = 0
-    y = 0
+    x = object_width / 2
+    y = total_height / 2
+    collections = []
     for rot in rotations:
         if not isinstance(rot, Rotation):
             rot = Rotation.from_quat(rot, normalized=True)
         polys = np.array(list(map(rot.apply, faces())))
         polys += [x, y, 0]
-        plot_polys(polys, ax=ax, ls=ls)
+        collections.append(plot_polys(polys, ax=ax, ls=ls))
         x += shift_x
+    return collections
 
 
 class DumbAxes3D(Axes3D):
