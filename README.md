@@ -31,6 +31,9 @@ torque-minimal = geodesic?
 quaternion slerp vs. quaternion nlerp vs. log-quaternion lerp:
 http://number-none.com/product/Understanding%20Slerp,%20Then%20Not%20Using%20It/
 
+Ken Shoemake:
+https://web.archive.org/web/20120915153625/http://courses.cms.caltech.edu/cs171/quatut.pdf
+
 Python Libs
 -----------
 
