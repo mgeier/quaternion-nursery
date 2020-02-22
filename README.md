@@ -68,6 +68,14 @@ equations  ofmotion.  The  arc  blend  approach—by  far  the  cheapest  of  th
 three—combines  small 10arc  segments  to  get  a  smooth  curve.  Given  only
 two  points  to  interpolate,  all  threeapproaches normally give a great arc."
 
+C implementation:
+https://github.com/erich666/GraphicsGems/tree/master/gemsiv/arcball
+
+Rotate vector by quaternion:
+
+`q**-1 v q` (Shoemake 85) or `q v q**-1`?
+Or is it the same?
+
 Python Libs
 -----------
 
@@ -91,6 +99,10 @@ torque-minimal path
 constant velocity
 
 non-commutative?
+
+"great arc in-betweening" (Shoemake 85)
+
+`q1 (q1**-1 q2)**u` (Shoemake 85)
 
 NLERP
 -----
@@ -120,3 +132,12 @@ http://qspline.sourceforge.net/qspline.pdf
 SciPy: https://github.com/scipy/scipy/pull/9831
 
 https://github.com/scipy/scipy/files/2932755/attitude_interpolation.pdf
+
+Shoemake 1985
+
+"There are lots of ways to achieve it---off the sphere; unfortunately we've
+learned too much."
+???
+
+XMQuaternionSquad function:
+https://docs.microsoft.com/en-us/windows/win32/api/directxmath/nf-directxmath-xmquaternionsquad
