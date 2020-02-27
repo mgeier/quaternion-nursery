@@ -43,14 +43,14 @@ curves."
 
 "Curves  on  a  sphere  are  harder  to  create,  understand,  and  control
 than  ordinarysplines.   The   recent   literature   contains   three   main
-approaches:   geometrictransliteration,  differential  equations,  and  arc
+approaches:   geometric transliteration,  differential  equations,  and  arc
 blends.  Here  is  a  reference  for  each:  J.Schlag,   “Using   Geometric
-Construction   to   Interpolate   Orientations   withQuaternions”  in Graphics
+Construction   to   Interpolate   Orientations   with Quaternions”  in Graphics
 Gems  II,  Academic  Press,  1991,  pp.  377–380;  A.  Barr,  B.Currin,  S.
 Gabriel,  and  J.  Hughes,  “Smooth  Interpolation  of  Orientations
-withAngular  Velocity  Constraints  using  Quaternions”  in Proceedings  of
+with Angular  Velocity  Constraints  using  Quaternions”  in Proceedings  of
 SIGGRAPH  ’92,ACM  Press,  1992,  pp.  313–320;  W.  Wang  and  B.  Joe,
-“Orientation  Interpolation  inQuaternion  Space  Using  Spherical  Biarcs”  in
+“Orientation  Interpolation  in Quaternion  Space  Using  Spherical  Biarcs”  in
 Proceedings  of  Graphics  Interface  ’93,Morgan  Kaufmann,  1993,  pp.
 24–32."
 
@@ -141,3 +141,76 @@ learned too much."
 
 XMQuaternionSquad function:
 https://docs.microsoft.com/en-us/windows/win32/api/directxmath/nf-directxmath-xmquaternionsquad
+
+John Schlag: Graphics Gems II, VIII.4 - Using Geometric Constructions to Interpolate Orientation with Quaternions
+
+Catmull--Rom using SLERP (but only uniform!)
+
+---
+
+Wang and Joe:
+Orientation Interpolation in Quatemion Space
+Using Spherical Biarcs
+
+In this paper we will use spherical biarcs represented as
+piecewise rational quadratic Bezier curves to interpolate points
+on S3. The spherical biarcs are then stitched together to design
+a G1, i.e. unit tangent vector continuous, interpolating spline
+curve on S3. The result is a locally controllable circular arc
+spline curve, or a rational quadratic spline curve on S3. This
+curve can be made C1 using a simple arclength parameteriza-
+tion or other reparameterization methods.
+
+mentioned methods:
+
+* spherical analogue of the cubic Bezier curve (Shoemake 1985)
+* SQUAD (Shoemake 1987, not available?)
+* the spherical analogues of the cubic cardinal spline and tensioned B-spline
+  (Pletinckx)
+* normalized cubic Hennite interpolant (Ge 1991, not available?)
+* spherical biarc (topic of the paper)
+
+So far there has been no comparison of the quality of the
+above interpolation methods, because of the difficulty of visu-
+alization in E4. [...]
+The main criterion for comparing the various methods
+has been the efficiency of computing in-between quaternions.
+[and this paper also only compares efficiency]
+
+
+Based on our experiments, we
+have chosen equal chord biarcs. But this choice is yet to be
+justified theoretically.
+
+
+SQUAD: analogue of Boehm's quadrangle construction of cubic curves
+not available:
+Shoemake, K. (1987), Quaternion Calculus and Fast An-
+imation, SIGGRAPH 87 Course Notes #10 : Computer
+Animation : 3D Motion Specification and Control, pp.
+101-121.
+
+spherical analogues of the cubic cardinal spline
+and the tensioned B-spline curve are used, where the curves
+are defined by subdivision procedures.
+Pletinckx, D. (1989), Quatemion Calculus as a Basic Tool
+in Computer Graphics, The Visual Computer, vo!. 5, pp.
+2-13.
+
+Hermite cubic interpolant is used to
+interpolate two points and the end tangents on S3, and then the
+interpolant is projected onto the sphere S3 through the center
+of S3, as in general the interpolant is not contained in S3.
+not available:
+Ge, Q.1. and Ravani, B. (1991), Computational Geome-
+try and Mechanical Design Synthesis, 13th IMAC World
+Congress on Computation and Applied Math. , Dublin,
+Ireland, pp. 1013-1015.
+
+---
+
+Biarcs in 2D and 3D (no rotations):
+http://www.ryanjuckett.com/programming/biarc-interpolation/
+
+
+Crouch, P., G. Kun, und F. Silva Leite. „The De Casteljau Algorithm on Lie Groups and Spheres“. Journal of Dynamical and Control Systems 5, Nr. 3 (1. Juli 1999): 397–429. https://doi.org/10.1023/A:1021770717822.
