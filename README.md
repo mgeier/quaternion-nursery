@@ -214,3 +214,27 @@ http://www.ryanjuckett.com/programming/biarc-interpolation/
 
 
 Crouch, P., G. Kun, und F. Silva Leite. „The De Casteljau Algorithm on Lie Groups and Spheres“. Journal of Dynamical and Control Systems 5, Nr. 3 (1. Juli 1999): 397–429. https://doi.org/10.1023/A:1021770717822.
+
+---
+
+Pletinckx 1989:
+
+Clark 1981: Matrix for cardinal splines
+
+B-splines: Prenter 1975; Foley 1984
+
+Tensioned B-splines (which are
+identical to Beta2-splines, see Barsky 1985) have
+the same properties but give something in between
+ordinary B-splines and straight lines (Duff 1986).
+
+Already three algorithms have been proposed to
+spline quaternions: a Bezier interpolation scheme
+by Ken Shoemake (1985), a B-spline interpolation
+scheme by T o m Duff (1986) and a Boehm quad-
+rangle spline by Ken Shoemake (1987).
+
+[approximation by repeated subdivision with t=0.5?]
+
+In practice, the subdivision operation has to be
+repeated only 3 or 4 times.
