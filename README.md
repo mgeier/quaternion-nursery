@@ -76,6 +76,9 @@ Rotate vector by quaternion:
 `q**-1 v q` (Shoemake 85) or `q v q**-1`?
 Or is it the same?
 
+exponential map?
+rotation axis multiplied by angle?
+
 Python Libs
 -----------
 
@@ -238,3 +241,10 @@ rangle spline by Ken Shoemake (1987).
 
 In practice, the subdivision operation has to be
 repeated only 3 or 4 times.
+
+---
+
+Watt 1992 Advanced Animation and Rendering Techniques
+Section 15.3.8: Parameterization of orientation
+
+
