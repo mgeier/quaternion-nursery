@@ -192,6 +192,7 @@ Shoemake, K. (1987), Quaternion Calculus and Fast An-
 imation, SIGGRAPH 87 Course Notes #10 : Computer
 Animation : 3D Motion Specification and Control, pp.
 101-121.
+https://www.worldcat.org/search?q=no%3A16843459&qt=advanced&dblist=638
 
 spherical analogues of the cubic cardinal spline
 and the tensioned B-spline curve are used, where the curves
@@ -247,4 +248,6 @@ repeated only 3 or 4 times.
 Watt 1992 Advanced Animation and Rendering Techniques
 Section 15.3.8: Parameterization of orientation
 
+SLERP: when angle is very small, use linear interpolation
 
+Equations for SQUAD, but no derivation (refers to Shoemake 1987)
