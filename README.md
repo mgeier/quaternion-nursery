@@ -251,3 +251,39 @@ Section 15.3.8: Parameterization of orientation
 SLERP: when angle is very small, use linear interpolation
 
 Equations for SQUAD, but no derivation (refers to Shoemake 1987)
+
+---
+
+Nielson 2004:
+\nu-Quaternion Splines for the Smooth Interpolation of Orientations
+
+Solve non-linear system of equations with an iterative method.
+
+Initial approximation, for example, 4D-spline interpolation, normalizing the results.
+
+non-uniform knot placement
+
+visualization: triad tracing graph
+
+tension parameters
+
+It is difficult to convey a sense of this experience here
+even with triad tracing graphs because they do not show
+the rate of transversal, which is one of the useful features of
+tension parameters. We urge readers to try our new method
+as we believe they will like it very much.
+
+\nu spline is piecewise cubic; has G2 continuity
+
+approximating, not interpolating
+
+"the [control points] are not known a priori and must be
+computed so that the curve actually interpolates."
+
+---
+
+Quaternion splines with TCB:
+
+http://www.idea2ic.com/File_Formats/Splines%20&%20Quaternions.pdf
+
+---
