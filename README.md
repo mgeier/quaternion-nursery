@@ -287,3 +287,49 @@ Quaternion splines with TCB:
 http://www.idea2ic.com/File_Formats/Splines%20&%20Quaternions.pdf
 
 ---
+
+Barr, Currin, Gabriel, Hughes (1992):
+Smooth Interpolation of Orientations with Angular Velocity Constraints
+using Quaternions
+
+Analogous to the mathematical foundations of flat-space spline curves, we
+minimize the net “tangential acceleration” of the quaternion path. We replace
+the flat-space quantities with curved-space quantities, and numerically solve
+the resulting equation with finite difference and optimization methods.
+
+Splining in non-Euclidean Spaces
+
+not found:
+S Gabriel, J Kajiya
+Spline interpolation in curved space. State of the art in image synthesis. SIGGRAPH 1985 course notes
+
+This paper presents a simpler (and extrinsic) version of the Gabriel/Kajiya
+approach to splining on arbitrary manifolds.
+
+Our techniques allow the user to specify arbitrarily large initial and final
+angular velocities of a rotating body; by assigning large angular velocities, a
+user can make an object tumble several full turns between successive keypoints.
+
+The techniques are fast enough to experiment
+with, taking a few minutes per interpolation.
+
+We find a path that minimizes a measure of net
+bending.
+We implement this, however, using a finite
+difference technique, so that we end up with a sequence
+of points on the path, rather than a continuous path. To
+produce a continuous path, we use Shoemakers slerping
+to interpolate between these points.
+
+we will seek a path
+in quaternion space, i.e., a path on the unit 3-sphere
+in 4-space, that minimizes the total squared tangential
+acceleration.
+
+In this section, for our constrained optimization problem, we consider some of
+the merits of using a continuous derivative versus using discrete derivatives.
+Ultimately we will choose the discrete approach, because it is simpler. The
+reader should not infer that continuous approaches are not worthy of further
+investigation, however.
+
+angular velocity constraints?
