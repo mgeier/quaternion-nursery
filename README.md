@@ -333,3 +333,76 @@ reader should not infer that continuous approaches are not worthy of further
 investigation, however.
 
 angular velocity constraints?
+
+---
+
+Kim, Kim, Shin 1995:
+A General Construction Scheme for Unit Quaternion Curves
+with Simple High Order Derivatives
+
+the de Casteljau type construction of cubic B-spline quaternion
+curves does not preserve C2-continuity
+
+[...] either as an algebraic construction using basis
+functions or as a geometric construction based on recursive linear
+interpolations [Barry & Goldman 1988].
+This paper proposes a general framework which
+extends the algebraic construction methods to SO(3).
+
+The two (i.e., algebraic and geometric) construction schemes
+generate identical curves in R3; however, this is not the case in
+the non-Euclidean space SO (3) [Kim, Kim, Shin 1995 (A C2 ...)].
+
+Though Shoemake [1985, 1991] postulates
+correct first derivatives, the quaternion calculus employed there
+is incorrect (see [Kim, Kim, Shin 1995 (A compact ...)] for more details).
+
+More seriously, the C2-continuity of a spline curve in R3 may
+not carry over to SO(3)
+
+Since it is possible to manipulate the position curve as well as the corresponding orientation
+curve in a unified manner, the modeling and manipulation of rigid
+motions can be managed more conveniently.
+
+exponential map (see Curtis: Matrix Groups)
+
+For this purpose, we may need to extend
+the quaternion curve construction scheme of this paper to that of
+quaternion surfaces and volumes. This is currently a difficult open
+problem. Therefore, the important problem of torque minimization
+for 3D rotations has not been solved in this paper.
+
+The two spaces S3 and SO(3) have the same local topology and
+geometry. The major difference is in the distance measures of the
+two spaces SO(3) and S3. A rotation curve Rq(t) \in SO(3) is twice
+as long as the corresponding unit quaternion curve q(t) \in S3.
+
+Here, we assume each
+rotation is specified in the local frame. This is simply for notational
+convenience; in the local frame, we can write the multiplications in
+the same order as the rotations. By reversing the order of quaternion
+multiplications, the same construction schemes can be applied to
+the quaternion curves defined in the global frame.
+
+Shoemake (1991) used the formula [...] In general, this formula is incorrect.
+
+Cumulative form
+
+cumulative basis functions
+
+This Bézier quaternion curve has a different
+shape from the Bézier quaternion curve of Shoemake (1985)
+
+---
+
+Kim, Kim, Shin 1996:
+A Compact Differential Formula for the First Derivative
+of a Unit Quaternion Curve
+
+Shoemake (1985) claimed [...]
+Shoemake (1991) used the formula [...] in deriving the quaternion curve
+differentials on S3 for the purpose of extending the
+Boehm (1982) quadrangle to S3.
+[...] however, the formula only holds under the cornplanarity condition [...]
+Unfortunately, Shoemake misinterpreted the meaning of dq, which is
+the differential q'(t), as the logarithm logq.
