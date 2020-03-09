@@ -406,3 +406,9 @@ Boehm (1982) quadrangle to S3.
 [...] however, the formula only holds under the cornplanarity condition [...]
 Unfortunately, Shoemake misinterpreted the meaning of dq, which is
 the differential q'(t), as the logarithm logq.
+
+derivation of q'(0) for previous papers:
+Shoemake 1985
+Shoemake 1991
+Kim, Nam 1993, 1994
+Hanotaux and Peroche 1993
