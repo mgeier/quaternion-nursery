@@ -436,3 +436,57 @@ on smooth animation of a moving 3D solid [Barr et al. 1992]
 Using a conceptual similarity to the great circle (interpolating two points) on the unit
 sphere S2, we consider how to construct a great 2-sphere S which interpolates three points
 p1, p2, p3 \in S3 in the 4D Euclidean space R4.
+
+---
+
+Grassia 1998:
+Practical Parameterization of Rotations Using the Exponential Map
+
+Unlike the quaternion parameterization, the domain of this parameterization
+is Euclidean, so it does contain singularities.
+
+On the other hand, S3 is an excellent place to interpolate rotations
+because it possesses the same local geometry and topology as S0(3).
+
+[Kim et. al. 95] developed closed-form quaternion curves on S3 using Bezier, Hermite,
+B-spline (or any) blending functions, and were able to calculate high-order
+parametric derivatives over the curves. This is great news for applications
+that must compute and optimize or integrate along fixed orientation curves.
+It does not aid greatly in differential control or optimization over the curve
+shape itself, since it provides no correspondingly simple method for differen-
+tiating the curve with respect to the quaternion control points. Even if it
+did we would st ill face the inconveniences described in the preceding para-
+graphs. Nevertheless, the ability to specify closed-form Hermite curves on
+S3 by quaternion keys and angular velocities at the keys seems promising for
+use in keyframe animation systems, given suitable methods for visualizing the
+quaternion curves.
+
+Given that we a re interest ed in paramet erizing a three-DOF rot ation ,
+we would like a paramet erization emb edded in R3 that is free of gimbal lock
+and interpolates rotations well using Euclidean interpolants such as cubic
+splines. This goal is, of course, unrealizable, as it is a standard exercise in
+topology to show that R3 cannot be mapped into S0(3) without singularities,
+i.e., gimbal lock.
+
+[exponential map ...]
+The only problem with this particular formulation is that calculating [...]
+goes to zero becomes numerically unstable.
+However, by rearranging the above formula a little, we will be able to see that this exponential
+map can be computed robustly even in the neighborhood of the origin: [...]
+
+[not found!]
+Hussein Yahia and Andre Gagalowicz.
+"Interactive Animation of Object Orientations."
+In Proceedings of the 2nd International Conference. Pixim 89.
+pp. 265-75 (September 1989) .
+
+[regarding Hanotaux and Peroche 1993:]
+Hanotaux
+notes that the straight line between two orientations in exponentially-mapped
+R3 is not, in general, equivalent to the geodesic between the two orientations
+in S3, but that "the approximation is not far from optimal." In fact the approximation can be quite far from optimal--quantifying how far is an open
+question, but in general the error increases the further the two axes of rotation diverge from parallel.
+
+However, representing three-DOF rotation functions in R3 is fraught with
+peril because whenever the curve crosses one of the singularity shells discussed
+in Section 3.2.1, some of the derivatives disappear.
