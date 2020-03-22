@@ -490,3 +490,31 @@ question, but in general the error increases the further the two axes of rotatio
 However, representing three-DOF rotation functions in R3 is fraught with
 peril because whenever the curve crosses one of the singularity shells discussed
 in Section 3.2.1, some of the derivatives disappear.
+
+---
+
+Kim and Nam, 1996:
+Hermite Interpolation of Solid Orientations with Circular
+Blending Quaternion Curves
+
+[about Kim, Kim, Shin: "A General ..."]
+However, the curve construction symmetry is not preserved
+under this transformation. That is, the Bezier quaternion curve of Reference 4 with control
+points q1, ..., qn \in SO(3) has a different curve shape
+from the one with qn, ..., q1 as its control points.
+
+Wang and Joe (1993) constructed a Hermite interpolation curve on S3 by using two circular
+arcs connected with C1-continuity. At the junction of two circular arcs, however, a large
+acceleration/torque is generated that gives an undesirable effect on the smooth animation
+of a moving solid (Barr et al. 1992)
+This is inevitable as long as circular arcs are used as basic components
+(see also the Nielson/Shieh circle spline of Reference 7).
+
+There are many Hermite quaternion curves on S3 which satisfy the same boundary
+conditions [many references are mentioned];
+however, they generate different curves on S3.
+
+[Idea: Cut S3 with a hyperplane containing the 2 points and velocities,
+which results in a 2-sphere.
+On that 2-sphere, create 2 arcs based on points and velocities.
+Then there are two options: blend and transform back to S3, or vice versa.]
