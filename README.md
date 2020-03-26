@@ -128,6 +128,18 @@ SQUAD
 Quaternion Splines
 ------------------
 
+Known approaches:
+
+* interpolate Euler angles
+* interpolate rotation matrices (nobody suggested that?)
+* interpolate quaternions in R4, then normalize the result
+* de Casteljau algorithm with SLERP
+* SQUAD?
+* spherical biarcs/rational quadratic splines in R4
+* intersect S3 with hyperplane, create two arcs in resulting 2-sphere, blend
+* iterative methods?
+* approximation by subdivision? Pletinckx?
+
 http://qspline.sourceforge.net/
 
 http://qspline.sourceforge.net/qspline.pdf
@@ -152,8 +164,10 @@ Catmull--Rom using SLERP (but only uniform!)
 ---
 
 Wang and Joe:
-Orientation Interpolation in Quatemion Space
+Orientation Interpolation in Quaternion Space
 Using Spherical Biarcs
+
+[similar to Nielson 1993?]
 
 In this paper we will use spherical biarcs represented as
 piecewise rational quadratic Bezier curves to interpolate points
@@ -170,7 +184,7 @@ mentioned methods:
 * SQUAD (Shoemake 1987, not available?)
 * the spherical analogues of the cubic cardinal spline and tensioned B-spline
   (Pletinckx)
-* normalized cubic Hennite interpolant (Ge 1991, not available?)
+* normalized cubic Hermite interpolant (Ge 1991, not available?)
 * spherical biarc (topic of the paper)
 
 So far there has been no comparison of the quality of the
@@ -518,3 +532,69 @@ however, they generate different curves on S3.
 which results in a 2-sphere.
 On that 2-sphere, create 2 arcs based on points and velocities.
 Then there are two options: blend and transform back to S3, or vice versa.]
+
+[Appendix I: derivation of quaternion first derivative]
+
+---
+
+Nielson 1993
+Smooth Interpolation of Orientations
+
+[rotation matrix]
+The axis of rotation is the
+eigenvector of O associated with the eigenvalue 1. The angle of rotation, \theta,
+satisfies
+1 + 2cos(\theta) = tr(O)
+where tr(O) denotes the trace (sum of diagonal elements).
+
+In fact, it turns out
+that SO(3) can not be embedded in E4. Hopf (1940) has shown the if we wish to embed SO(3) in
+Ek, then k must be greater than or equal to 5.
+
+Normalized Cubic Spline [in R4] and Related Methods:
+[...] This is really a rather inelegant way to solve the problem, [...]
+The basic drawback to this
+approach is the potential occurrence of cusps or tight kinks which result form the normalization.
+
+The Nielson/Shieh Circle Method:
+The interpolation curve used for this method consists of a
+collection of rational quadratic curves constrained to lie on the unit sphere in E4 and joined so as to
+have C1 continuity.
+
+[difference to Wang and Joe 1993 (Biarcs)?]
+
+Spherical Bernstein/Bezier Methods: [...]
+
+The Spherical Quadratic B-spline Method:
+This method is similar in many respects to the
+Nielson/Shieh circle method.
+
+Shoemake (1985) states "For the numerically knowledgeable, this construction approximates the
+derivative at points of a sampled function by averaging the central difference of the sample
+sequence". The Catmull/Rom spline is also based upon estimates of derivatives based upon central
+differences. These ideas can be mapped to the present context by the following choice of inner
+Bezier points [...]
+Hanson (private communication) has shown that this choice is the same as that of Schlag (1992).
+
+The Nielson/Heiland Spherical B-spline Method:
+One the smoothest methods of this type that
+we have observed is a method proposed by Nielson and Heiland (1992) which is based upon
+"spherical B-splines".
+
+B-splines do not interpolate
+to their data, they only approximate it. For the application of animating orientations, it is important
+to be able to construct a curve that interpolates the data. In much the same way that B-splines can
+be used as a basis for constructing a cubic interpolating spline, Nielson and Heiland use the
+spherical B-spline to find an interpolating curve which is composed of joining together segments of
+third order spherical B/B [Bernstein/Bezier] curves.
+[...] They use an iterative method to solve it: [...]
+
+The Minimum Tangential Acceleration Method:
+Barret al (1992)
+One of the drawbacks to this method is the difficulty with implementing
+it and trusting the canned software to actually compute a true minimum.
+
+
+When one is trying to assess the quality of some animation technique, it is very helpful to observe
+or experience the animation. Conventional publication media do not presently allow this. Possibly
+some of the new multimedia publications will remove this problem in the future.
