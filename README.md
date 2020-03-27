@@ -598,3 +598,34 @@ it and trusting the canned software to actually compute a true minimum.
 When one is trying to assess the quality of some animation technique, it is very helpful to observe
 or experience the animation. Conventional publication media do not presently allow this. Possibly
 some of the new multimedia publications will remove this problem in the future.
+
+---
+
+Crouch et al. 1999:
+The De Casteljau Algorithm on Lie Groups and Spheres
+
+[...] and derive expressions for the derivatives of the generalized polynomial curves obtained from the algorithm.
+This does not seem to be done elsewhere in the literature.
+
+Thus the algorithm for S mcan be based upon the
+somewhat simpler algorithm for SO(m + 1).
+
+much interest has been demonstrated in developing the technique for S3 viewed as
+the space of unit quarternions and a convenient parameterization of SO(3).
+[...] However, it is clear that the current literature fails to develop
+a satisfactory means of dealing with Ck smoothness, k >= 1, because of the
+difficulty in dealing with closed form solutions for the derivatives. This has
+been achieved in a limited sense in Ge and Ravini [22], but not in a general
+framework applicable in a wide variety of problems.
+
+These references also fail to tackle the smoothness of the interpolants
+in a completely satisfactory manner. Clearly the smoothness of a curve in
+general depends upon its parameterization. For curves on general Rieman-
+nian manifolds, one can develop the notion of arc length, induced by the
+Riemannian structure. By also developing a means to differentiate which is
+compatible with this metric structure, the so-called Riemannian covariant
+derivative, one can consider the Ck , k >= 1, smoothness of curves relative to
+the arc length parameterization. This can be considered as a measure of the
+intrinsic smoothness of the curve, as measured by the Riemannian structure.
+
+
