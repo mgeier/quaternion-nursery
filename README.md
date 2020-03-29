@@ -628,4 +628,40 @@ derivative, one can consider the Ck , k >= 1, smoothness of curves relative to
 the arc length parameterization. This can be considered as a measure of the
 intrinsic smoothness of the curve, as measured by the Riemannian structure.
 
+[formulation on Riemannian manifolds, following Park and Ravani (1995)]
+
+[formula for second Bezier control point (x2) from first and second derivative
+of x0]
+
+The problem is truly a two-point boundary value problem. In the Euclidean
+case this is not an immediate computational problem, see Farin [19].
+However, in the non-Euclidean case this issue becomes much more involved.
+[ -> specify first and second derivative at t=0]
+indeed be calculated recursively
+using the formulas above.
+
+Blindly using the schemes above does however lead to interpolating curves
+which sometimes display wild departures from the set of interpolating data,
+as explained in Farin [19].
+
+A few remarks should be made concerning the general applicability of
+the De Casteljau construction. Although the geometry of a Riemannian
+manifold possesses enough structure to formulate the construction, the ba-
+sic ingredients used, the geodesic arcs, are implicitly defined by a set of
+nonlinear differential equations. Thus the basic algorithm can be only prac-
+tically implemented when we can reduce the calculation of these geodesies
+to a manageable form.
+
+In the case of compact Lie groups, the geodesies are just one-parameter
+subgroups and hence for matrix compact Lie groups the computation of a
+geodesic is just exponentiation of a matrix.
+
+infinitesimal generators of the geodesic curves on G
+
+[... product of exponentials ...]
+
+[derivatives at t=0 and t=1, many proofs ...]
+
+[strange Y-shaped operator]
+
 
