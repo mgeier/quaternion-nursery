@@ -662,6 +662,26 @@ infinitesimal generators of the geodesic curves on G
 
 [derivatives at t=0 and t=1, many proofs ...]
 
-[strange Y-shaped operator]
+The Lie algebra of SO (3) is so(3), the vector space of skew symmetric 3x3
+matrices.
 
+4.1. Example. We have used the formula (18) recursively to implement
+the De Casteljau algorithm for a cubic polynomial on the sphere S3.
 
+Interpolating curves satisfying arbitrary boundary conditions on a Rie-
+mannian manifold can also be obtained using a variational approach. While
+in the Euclidean case both methods produce exactly the same curves, for
+general Riemannian manifolds this situation is highly unlikely.
+
+---
+
+Crouch, Silva Leite, Kun 1999
+Geometric splines
+
+We examine the De Casteljau Algorithm in the context of Lie groups
+and spheres. [...]
+We are able to fully develop the algorithm for cubic splines with Hermite boundary
+conditions for general n. We implement more general boundary conditions for cubic
+splines on the 2-sphere.
+
+[very similar to Crouch et al. 1999 above]
