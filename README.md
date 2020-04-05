@@ -685,3 +685,15 @@ conditions for general n. We implement more general boundary conditions for cubi
 splines on the 2-sphere.
 
 [very similar to Crouch et al. 1999 above]
+
+---
+
+Ge and Ravani 1994
+Geometric Construction of Bezier Motions
+
+This paper compliments the analytical results presented
+in our companion paper (Ge and Ravani, 1994) [Computer Aided ...] in providing
+discrete (rather than continuous) computational algorithms for
+motion interpolation and approximation.
+
+screw axis, Plücker vectors, dual vector
