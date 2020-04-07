@@ -697,3 +697,88 @@ discrete (rather than continuous) computational algorithms for
 motion interpolation and approximation.
 
 screw axis, Plücker vectors, dual vector
+
+---
+
+Park and Ravani 1995
+Bezier Curves on Riemannian Manifolds and Lie Groups with Kinematics Applications
+
+In principle one can obtain a col-
+lection of local coordinate charts for a given curved space, and
+apply existing Euclidean interpolation techniques to these co-
+ordinates. The resulting curves, however, will depend on the
+choice of local coordinates, which clearly leaves something to
+be desired from both a mathematical as well as an engineering
+perspective. Another requirement motivated by the moving
+rigid body problem is that, to the extent possible, the resulting
+motions should not depend on the choice of inertial or body-
+fixed reference frames; in the language of Lie groups this can
+be phrased as the question of whether a group admits a bi-
+invariant Riemannian metric. Using standard results from Lie
+theory it can be shown that bi-invariant orientation trajectories
+can be constructed, but that in general there is no bi-invariant
+metric for the spatial displacements (see, e.g., Park et al.,
+1993).
+
+Shoemake
+(1985) presents a class of methods for generating curves on
+rotations that are based on unit quaternion representation.
+Although unit quaternions have certain well-known advantages
+over other representations of rotations (e.g., Euler angles),
+Shoemake's approach is essentially coordinate dependent: the
+resulting motions are not invariant with respect to choice of
+inertial and body-fixed frames, and his methods do not ade-
+quately address the underlying geometry of the space of ro-
+tations (e.g., the 2-1 nature of the unit quaternion
+representation).
+
+Juettler (1994) has provided a theoretical eval-
+uation of several approaches for motion interpolation and has
+discussed coordinate frame dependency of some of these ap-
+proaches.
+
+In this article we formulate a general framework for con-
+structing Bezier curves on Riemannian manifolds, and then
+focus specifically on a special class of Riemannian manifold,
+the compact Lie groups.
+
+Classical Bezier Curves [...]
+Reversing the order of the vertexes results in the same curve.
+
+That Bezier's original construction and De Casteljau's al-
+gorithm are equivalent is remarkable, and can fundamentally
+be traced to the fact that the curve lies in Euclidean space.
+
+In the De Casteljau method
+the concept of linear interpolation between two points in a
+curved space needs to be defined; this can be readily done on
+a Riemannian manifold, where the minimal geodesic plays the
+role of the straight line for curved spaces, and lengths can be
+measured in terms of the Riemannian metric. Bezier's con-
+struction, however, does not seem to generalize in a natural
+way to the Riemannian setting. Although tangency between
+curves is well-defined, the notion of an osculating plane relies
+inherently on the manifold being embedded in some larger
+ambient Euchdean space, and in general there exist several
+differnt ways to do this. It is also more desirable to define a
+Bezier curve in terms of the intrinsic geometry of the manifold,
+rather than the underlying space in which it lies. For Rieman-
+nian manifolds, therefore, the natural way to define Bezier
+curves is by generalizing De Casteljau's algorithm. Naturally
+for certain manifolds the minimal geodesic between two points
+may not always be unique, so that a number of subtleties
+(addressed below) will arise.
+
+It is clear that constructing Bdzier curves on Riemannian
+manifolds by this algorithm is computationally more involved
+than for the Euclidean case: computing the geodesic between
+any two points involves the solution of the nonUnear differ-
+ential equation (1), a two-point boundary value problem (and
+therefore more difficult than integrating a differential equation
+with only initial conditions). Even if we assume that the geo-
+desies forming the control polygon have been precomputed
+and stored in a table, for each instant t the geodesic equations
+still need to be solved (n-1)(n-2)/2 times. Clearly this
+presents difficulties for interactive design applications.
+
+
