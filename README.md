@@ -819,4 +819,15 @@ SO(3). From a physical viewpoint this is more appealing, since
 there is nothing natural about the screw motions from the
 point of view of dynamics.
 
+---
+
+Jüttler, 1994:
+VISUALIZATION OF MOVING OBJECTS USING DUAL QUATERNION CURVES
+
+an interpolating motion whose trajectories are rational Bezier curves is constructed
+
+Dual quaternions
+prove to be very useful in computer graphics.
+
+
 
