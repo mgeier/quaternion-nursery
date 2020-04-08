@@ -781,4 +781,42 @@ and stored in a table, for each instant t the geodesic equations
 still need to be solved (n-1)(n-2)/2 times. Clearly this
 presents difficulties for interactive design applications.
 
+the set of all tangent vectors at p, denoted TpG,
+forms a vector space, called the tangent space to G at p. The
+tangent space at the identity p = I is given a special name,
+called the Lie algebra of G, and denoted by a lower-case g.
+On a matrix Lie group the Lie algebra is also given by matrices.
+For example, the Lie algebra of SO(3), denoted so(3), is the
+set of 3 x 3 real skew-symmetric matrices
+
+one-parameter subgroups of a Lie group [...] minimal-length paths
+
+Riemannian metrics
+
+Any Lie group admits a left- or right
+invariant metric from the construction above, but not all Lie
+groups admit a bi-invariant metric.
+
+One well-known condition
+in which a bi-invariant metric is always guaranteed to exist is
+if the Lie group is compact.
+
+The rotation group SO(3), consisting of the 3x3 real or-
+thogonal matrices with unit determinant, forms a [compact] Lie group,
+with its Lie algebra so(3) given by the vector space of 3 x 3
+real skew-symmetric matrices of the form [...]
+
+Lemmas 1 and 2 suggest the standard visualization
+of SO(3) as a solid ball of radius \pi, centered at the origin with
+the antipodal points identified
+
+[...] the Bezier curve is given by [...]
+
+Hence, given a particular left- or right-invariant Riemannian
+metric on SE(3), the corresponding Bezier curve can be con-
+structed by combining the appropriate B6zier curves in (R^ and
+SO(3). From a physical viewpoint this is more appealing, since
+there is nothing natural about the screw motions from the
+point of view of dynamics.
+
 
