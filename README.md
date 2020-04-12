@@ -869,3 +869,15 @@ tional trajectories) has some important advantages: [...]
 The author thinks
 that dual quaternion curves have proved to be a very
 useful tool in computer graphics.
+
+
+---
+
+Kuipers 1999
+Quaternions and Rotation Sequences
+
+[some Quaternion basics, no splines]
+
+set of all quaternions: non-commutative division ring
+
+section 7: rotation operator geometry
