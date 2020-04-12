@@ -881,3 +881,83 @@ Quaternions and Rotation Sequences
 set of all quaternions: non-commutative division ring
 
 section 7: rotation operator geometry
+
+---
+
+Pobegailo 1994
+Spherical splines and orientation interpolation
+
+This paper presents a method for design-
+ing spherical curves by two weighted spa-
+tial rotations.
+
+The de-
+signed curves have the following features:
+C 1 continuity, local control, and invari-
+ance under orthogonal transformations of
+coordinate systems.
+
+---
+
+Hanotaux and Peroche 1993
+Interactive Control of Interpolations for Animation and Modeling
+
+The parametrization is based on an opti-
+mization process.
+
+We distinguish three different ap-
+proaches:
+• Geometrical construction in quaternion space
+• Parametrization of quaternion space
+  Our solution, built on a parametrization using quater-
+  nion logarithms, is presented below but belongs to this
+  category.
+• Optimization process
+
+[log, Catmull--Rom interpolation, exp]
+
+it is possible to integrate posi-
+tion and orientation in the same interpolation process
+[position and logarithm of quaternion]
+
+Indeed, tangents were
+designed for finely tuning the curve's appearance, not for
+specifying velocity at key-frames.
+
+A standard solution to solve these problems is based on a
+reparametrization of the trajectory.
+
+However, such a reparametrization presents, from our point
+of view, the drawback to require the specification of still an-
+other curve, hence more and more interaction. Our aim is to
+develop a technique allowing the automatic reparametriza-
+tion of interpolation curves. However, we also wish to let
+the user have the possibility to modify the proposed solution
+with the help of additional constraints.
+
+As we want to generate realistic motion, we choose to min-
+imize the sum of the forces required to realize this motion.
+This principle is suggested by the fact that realistic motions
+tend to minimize the energy expanded to perform them [17] .
+According to Newton's law, it comes down in fact to min-
+imizing the sum of the accelerations occurring during the
+motion. The scheme we have chosen is based on an opti-
+mization technique.
+
+Of course, we also want to reparametrize orientation curves.
+The objectives are equivalent to those regarding positions,
+except we now have to minimize the sum of the torques
+applied to the animated body.
+
+In fact, we do not parametrize positions independently from
+orientations. Indeed, it would lead in most cases to two dif-
+ferents time parameter sets. In consequence, we choose to
+minimize both translational and angular accelerations. The
+new criterion is the sum of the previous criterions for po-
+sition and orientation.
+
+The parametrization
+used seems easier to understand and to implement than those
+previously presented.
+
+
