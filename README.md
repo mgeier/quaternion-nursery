@@ -829,5 +829,43 @@ an interpolating motion whose trajectories are rational Bezier curves is constru
 Dual quaternions
 prove to be very useful in computer graphics.
 
+Let some positions ( = points + orientations)
+of a moving object in 3-space be given. A continuous
+motion interpolating these positions is to be found.
 
+The method [spherical Casteljau] has proved to be powerful, but the in-
+terpolating motion possesses some disadvantages: The
+trajectories of the moving object are nonrational curves.
+( In fact, their explicit parametric representation seems
+to be unknown!) The interpolation of more than two
+positions by one motion and the construction of higher
+than first order continuous spline motions turn out to
+be difficult.
 
+Another approach to the solution of the interpolation
+problem has been suggested by Ge and Ravani[6].
+The positions of the moving objects are represented
+using dual quaternion curves without any normaliza-
+tion conditions. A multiplication of these curves with
+arbitrary dual factors does not change the described
+motion. A de Casteljau-like algorithm is formulated,
+but the influence of the weights of the control points
+(which are dual numbers!) is very complex.
+
+In this paper, the positions of the moving object
+will be represented by dual quaternion curves satis-
+fying a quadratic normalization condition (Plücker's
+condition). These curves can be multiplied with ar-
+bitrary real factors without influencing the described
+motion. They are described by Bezier curves, therefore
+the trajectories of the moving object are rational
+Bezier curves, too.
+
+The use of rational motions (i.e., motions with ra-
+tional trajectories) has some important advantages: [...]
+
+[...]
+
+The author thinks
+that dual quaternion curves have proved to be a very
+useful tool in computer graphics.
