@@ -960,4 +960,65 @@ The parametrization
 used seems easier to understand and to implement than those
 previously presented.
 
+---
+
+David Eberly 1999-2010:
+Quaternion Algebra and Calculus
+
+The ideas are based on the article [Shoemake 1987].
+
+[nice summary of quaternion basics]
+
+q = cos θ + û sin θ [...]
+However, observe that the quaternion product ûû = −1.
+
+In fact, Euler’s identity for complex numbers
+generalizes to quaternions,
+exp(ûθ) = cos θ + û sin θ,
+where the exponential on the left-hand side is evaluated by symbolically substituting ûθ into the power series
+representation for exp(x) and replacing products ûû by −1.
+
+q^t = (cos θ + û sin θ)^t = exp(ûtθ) = cos(tθ) + û sin(tθ)
+
+log(q) = log(cos θ + û sin θ) = log(exp(ûθ)) = ûθ.
+
+It is important to note that the noncommutativity of quaternion multiplication disallows the standard
+identities for exponential and logarithm functions. The quaternions exp(p) exp(q) and exp(p + q) are not
+necessarily equal. The quaternions log(pq) and log(p) + log(q) are not necessarily equal.
+
+The only support we need for quaternion interpolation is to differentiate unit quaternion functions raised
+to a real-valued power.
+
+[Boehm 1982] which has the flavor of
+bilinear interpolation on a quadrilateral.
+
+[equations for SQUAD and its derivative]
+
+---
+
+David Eberly 1999-2002:
+Key Frame Interpolation via Splines and Quaternions
+
+[Kochanek–Bartels with quaternions]
+
+While those splines were defined in terms of positional quantities (an additive system), they are easily
+extended to quaternions (a multiplicative system).
+
+[is this the right code?]
+https://github.com/OpenXRay/FreeMagic/tree/master/Applications/KeyframeAnimation
+
+---
+
+David Eberly 2017:
+Interpolation of Rigid Motions in 3D
+
+[only SLERP, no splines!]
+
+This document describes how to intepolate between two rigid transformations, each involving rotation and
+translation; reflections are not considered here.
+
+Computing the geodesic path connecting two rotations does not require a quaternion representation. It is
+possible to compute it using a matrix representation and the exponential map for rotations as the Lie Group
+SO(3).
+
 
