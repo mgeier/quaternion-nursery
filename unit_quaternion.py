@@ -44,28 +44,28 @@ class Vector(_namedtuple('VectorBase', 'x y z')):
             self.z / scalar,
         )
 
-    def __xor__(self, other):
-        """Cross product."""
-        a1, a2, a3 = self
-        b1, b2, b3 = other
-        return Vector(
-            a2 * b3 - a3 * b2,
-            a3 * b1 - a1 * b3,
-            a1 * b2 - a2 * b1,
-        )
+    #def __xor__(self, other):
+    #    """Cross product."""
+    #    a1, a2, a3 = self
+    #    b1, b2, b3 = other
+    #    return Vector(
+    #        a2 * b3 - a3 * b2,
+    #        a3 * b1 - a1 * b3,
+    #        a1 * b2 - a2 * b1,
+    #    )
 
-    def __rxor__(self, other):
-        # TODO: anti-commutative?
-        return NotImplemented
+    #def __rxor__(self, other):
+    #    # TODO: anti-commutative?
+    #    return NotImplemented
 
-    def __matmul__(self, other):
-        """Dot product."""
-        a1, a2, a3 = self
-        b1, b2, b3 = other
-        return (a1 * b1) + (a2 * b2) + (a3 * b3)
+    #def __matmul__(self, other):
+    #    """Dot product."""
+    #    a1, a2, a3 = self
+    #    b1, b2, b3 = other
+    #    return (a1 * b1) + (a2 * b2) + (a3 * b3)
 
-    def __rmatmul__(self, other):
-        return self.__matmul__(other)
+    #def __rmatmul__(self, other):
+    #    return self.__matmul__(other)
 
     @property
     def norm(self):
@@ -74,6 +74,12 @@ class Vector(_namedtuple('VectorBase', 'x y z')):
     def normalized(self):
         # TODO: return UnitVector?
         return self / self.norm
+
+
+def ensure_vector(v):
+    if not isinstance(v, Vector):
+        v = Vector(*v)
+    return v
 
 
 #class UnitVector(Vector):
@@ -85,8 +91,7 @@ class Vector(_namedtuple('VectorBase', 'x y z')):
 #
 #    @classmethod
 #    def from_vector(cls, v):
-#        if not isinstance(v, Vector):
-#            v = Vector(*v)
+#        v = ensure_vector(v)
 #        norm = v.norm
 #        return super().__new__(cls, v.x / norm, v.y / norm, v.z / norm)
 
@@ -94,8 +99,6 @@ class Vector(_namedtuple('VectorBase', 'x y z')):
 class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
 
     __slots__ = ()
-
-    # TODO: make sure that "vector" is a Vector?
 
     def __mul__(self, other):
         if not isinstance(other, Quaternion):
@@ -125,9 +128,9 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
 
     def conjugate(self):
         return super().__new__(
-            UnitQuaternion,
+            type(self),
             self.scalar,
-            -self.vector,
+            -ensure_vector(self.vector),
         )
 
     @property
@@ -173,7 +176,7 @@ class UnitQuaternion(Quaternion):
     def axis(self):
         assert self.scalar <= 1
         # NB: This is the same as self.vector.normalized()
-        return self.vector / _math.sqrt(1 - self.scalar**2)
+        return ensure_vector(self.vector) / _math.sqrt(1 - self.scalar**2)
 
     @property
     def angle(self):
