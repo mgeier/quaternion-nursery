@@ -91,7 +91,55 @@ class Vector(_namedtuple('VectorBase', 'x y z')):
 #        return super().__new__(cls, v.x / norm, v.y / norm, v.z / norm)
 
 
-class UnitQuaternion(_namedtuple('UnitQuaternionBase', 'scalar vector')):
+class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
+
+    __slots__ = ()
+
+    # TODO: make sure that "vector" is a Vector?
+
+    def __mul__(self, other):
+        if not isinstance(other, Quaternion):
+            return NotImplemented
+        if isinstance(self, UnitQuaternion) and isinstance(other, UnitQuaternion):
+            result_type = UnitQuaternion
+        else:
+            result_type = Quaternion
+        a1 = self.scalar
+        b1, c1, d1 = self.vector
+        a2 = other.scalar
+        b2, c2, d2 = other.vector
+        return super().__new__(
+            result_type,
+            # TODO: properly derive this
+            a1*a2 - b1*b2 - c1*c2 - d1*d2,
+            Vector(
+                a1*b2 + b1*a2 + c1*d2 - d1*c2,
+                a1*c2 - b1*d2 + c1*a2 + d1*b2,
+                a1*d2 + b1*c2 - c1*b2 + d1*a2,
+            )
+        )
+
+    def __rmul__(self, other):
+        """Disable inherited concatenation operator."""
+        return NotImplemented
+
+    def conjugate(self):
+        return super().__new__(
+            UnitQuaternion,
+            self.scalar,
+            -self.vector,
+        )
+
+    @property
+    def xyzw(self):
+        return *self.vector, self.scalar
+
+    @property
+    def wxyz(self):
+        return self.scalar, *self.vector
+
+
+class UnitQuaternion(Quaternion):
 
     __slots__ = ()
 
@@ -113,39 +161,10 @@ class UnitQuaternion(_namedtuple('UnitQuaternionBase', 'scalar vector')):
             _math.sin(angle / 2) * Vector(*axis).normalized(),
         )
 
-    def __mul__(self, other):
-        if not isinstance(other, UnitQuaternion):
-            return NotImplemented
-        a1 = self.scalar
-        b1, c1, d1 = self.vector
-        a2 = other.scalar
-        b2, c2, d2 = other.vector
-        return super().__new__(
-            UnitQuaternion,
-            # TODO: properly derive this
-            a1*a2 - b1*b2 - c1*c2 - d1*d2,
-            Vector(
-                a1*b2 + b1*a2 + c1*d2 - d1*c2,
-                a1*c2 - b1*d2 + c1*a2 + d1*b2,
-                a1*d2 + b1*c2 - c1*b2 + d1*a2,
-            )
-        )
-
-    def __rmul__(self, other):
-        """Disable inherited operator."""
-        return NotImplemented
-
     def __pow__(self, alpha):
         return UnitQuaternion.from_axis_angle(self.axis, alpha * self.angle)
 
-    def conjugate(self):
-        return super().__new__(
-            UnitQuaternion,
-            self.scalar,
-            -self.vector,
-        )
-
-    inverse = conjugate
+    inverse = Quaternion.conjugate
 
     # TODO: exponential map
     # TODO: logarithmic map
@@ -160,10 +179,6 @@ class UnitQuaternion(_namedtuple('UnitQuaternionBase', 'scalar vector')):
     def angle(self):
         return 2 * _math.acos(self.scalar)
 
-    @property
-    def xyzw(self):
-        return *self.vector, self.scalar
-
-    @property
-    def wxyz(self):
-        return self.scalar, *self.vector
+    def rotate_vector(self, v):
+        rotated = self * Quaternion(0, v) * self.inverse()
+        return rotated.vector
