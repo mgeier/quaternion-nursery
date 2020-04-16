@@ -94,3 +94,12 @@ class UnitQuaternion(Quaternion):
     def rotate_vector(self, v):
         rotated = self * Quaternion(0, v) * self.inverse()
         return rotated.vector
+
+
+def slerp(one, two, t):
+    """SLERP.
+
+    *t* has to be between 0 and 1.
+
+    """
+    return (two * one.inverse())**t * one
