@@ -71,6 +71,8 @@ class UnitQuaternion(Quaternion):
         )
 
     def __pow__(self, alpha):
+        if self.scalar == 1:
+            return super().__new__(UnitQuaternion, self.scalar, self.vector)
         return UnitQuaternion.from_axis_angle(self.axis, alpha * self.angle)
 
     # TODO: proper implementation to get meaningful docstring?

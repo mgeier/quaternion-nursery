@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D, proj3d
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import numpy as np
-from scipy.spatial.transform import Rotation
+
+from unit_quaternion import UnitQuaternion
 
 
 shade_colors = partial(Axes3D._shade_colors, 'dummy')
@@ -114,9 +115,8 @@ def plot_rotations(rotations, *, ax=None):
     y = total_height / 2
     collections = []
     for rot in rotations:
-        if not isinstance(rot, Rotation):
-            rot = Rotation.from_quat(rot, normalized=True)
-        polys = np.array(list(map(rot.apply, faces())))
+        # TODO: convert from other rotation formats?
+        polys = np.array([list(map(rot.rotate_vector, face)) for face in faces()])
         polys += [x, y, 0]
         collections.append(plot_polys(polys, ax=ax, ls=ls))
         x += shift_x
