@@ -34,11 +34,7 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
 
     def conjugate(self):
         x, y, z = self.vector
-        return super().__new__(
-            type(self),
-            self.scalar,
-            (-x, -y, -z),
-        )
+        return super().__new__(type(self), self.scalar, (-x, -y, -z))
 
     @property
     def xyzw(self):
