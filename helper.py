@@ -1,4 +1,5 @@
 from functools import partial
+from math import radians
 
 import matplotlib
 from matplotlib.colors import LightSource
@@ -185,3 +186,11 @@ class DumbAxes3D(Axes3D):
 
 
 matplotlib.projections.register_projection(DumbAxes3D)
+
+
+def angles2quat(azimuth, elevation, roll):
+    return (
+        UnitQuaternion.from_axis_angle((0, 0, 1), radians(azimuth)) *
+        UnitQuaternion.from_axis_angle((1, 0, 0), radians(elevation)) *
+        UnitQuaternion.from_axis_angle((0, 1, 0), radians(roll))
+    )
