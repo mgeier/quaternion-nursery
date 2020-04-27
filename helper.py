@@ -143,9 +143,11 @@ class DumbAxes3D(Axes3D):
         xmin, xmax = self.get_xlim3d()
         ymin, ymax = self.get_ylim3d()
         zmin, zmax = self.get_zlim3d()
+        # NB: z limits are deliberately swapped to switch to right-handed
+        #     coordinates, z pointing out of the figure (towards the viewer)
         self.M = proj3d.world_transformation(xmin, xmax,
                                              ymin, ymax,
-                                             zmin, zmax)
+                                             zmax, zmin)
         self.vvec = NotImplemented
         self.eye = NotImplemented
 
