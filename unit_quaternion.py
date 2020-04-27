@@ -70,6 +70,16 @@ class UnitQuaternion(Quaternion):
             (s * x / norm, s * y / norm, s * z / norm),
         )
 
+    @classmethod
+    def from_unit_xyzw(cls, xyzw):
+        """
+
+        Input is *not* normalized!
+
+        """
+        x, y, z, w = xyzw
+        return super().__new__(cls, w, (x, y, z))
+
     def __pow__(self, alpha):
         if self.scalar == 1:
             return super().__new__(UnitQuaternion, self.scalar, self.vector)

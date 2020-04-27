@@ -115,7 +115,8 @@ def plot_rotations(rotations, *, ax=None):
     y = total_height / 2
     collections = []
     for rot in rotations:
-        # TODO: convert from other rotation formats?
+        if not isinstance(rot, UnitQuaternion):
+            rot = UnitQuaternion.from_unit_xyzw(rot)
         polys = np.array([list(map(rot.rotate_vector, face)) for face in faces()])
         polys += [x, y, 0]
         collections.append(plot_polys(polys, ax=ax, ls=ls))
