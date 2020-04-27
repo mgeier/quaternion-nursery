@@ -72,55 +72,71 @@ def faces():
     yield p + south
 
 
-def plot_polys(polys, *, ax=None, ls=None):
-    if ax is None:
-        raise TypeError('TODO: create default axes (and figure?)')
+def create_polys(rot, *, ls=None):
+    if not isinstance(rot, UnitQuaternion):
+        rot = UnitQuaternion.from_unit_xyzw(rot)
+    polys = np.array([list(map(rot.rotate_vector, face)) for face in faces()])
     if ls is None:
         ls = LightSource()
     color = 'white'
+    facecolors = shade_colors(color, generate_normals(polys), ls)
+    return polys, facecolors
+
+
+def create_collection(ax):
     alpha = 1
     linewidth = 0.5
     edgecolor = 'black'
     coll = Poly3DCollection(
-        polys,
+        [],
         closed=True,
         alpha=alpha,
         linewidth=linewidth,
         edgecolor=edgecolor,
     )
-
-    colset = shade_colors(color, generate_normals(polys), ls)
-    coll.set_facecolors(colset)
     ax.add_collection3d(coll)
     return coll
 
 
-def plot_rotations(rotations, *, ax=None):
+def prepare_axis(n, *, ax=None):
+    """
+
+    Returns collections together with their offsets.
+
+    """
     if ax is None:
         ax = plt.gca(projection='dumb3d')
     object_width = 12
     shift_x = object_width
-
     _, _, x1, y1 = ax.bbox.bounds
     aspect = x1 / y1
-
-    total_width = object_width * len(rotations)
+    total_width = object_width * n
     total_height = total_width / aspect
     ax.set_xlim(0, total_width)
     ax.set_ylim(0, total_height)
-
-    ls = LightSource()
-
     x = object_width / 2
     y = total_height / 2
+    z = 0
+    return [(create_collection(ax), [x + i * shift_x, y, z]) for i in range(n)]
+
+
+def update_plot(collections_and_offsets, rotations, *, ls=None):
+    if ls is None:
+        ls = LightSource()
     collections = []
-    for rot in rotations:
-        if not isinstance(rot, UnitQuaternion):
-            rot = UnitQuaternion.from_unit_xyzw(rot)
-        polys = np.array([list(map(rot.rotate_vector, face)) for face in faces()])
-        polys += [x, y, 0]
-        collections.append(plot_polys(polys, ax=ax, ls=ls))
-        x += shift_x
+    for (coll, offset), rot in zip(collections_and_offsets, rotations):
+        polys, facecolors = create_polys(rot, ls=ls)
+        polys += offset
+        coll.set_verts(polys)
+        coll.set_facecolors(facecolors)
+        collections.append(coll)
+    return collections
+
+
+def plot_rotations(rotations, *, ax=None):
+    collections = prepare_axis(len(rotations), ax=ax)
+    ls = LightSource()
+    collections = update_plot(collections, rotations, ls=ls)
     return collections
 
 
