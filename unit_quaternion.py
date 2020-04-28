@@ -36,6 +36,17 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
         x, y, z = self.vector
         return super().__new__(type(self), self.scalar, (-x, -y, -z))
 
+    def normalize(self):
+        norm = self.norm
+        x, y, z, w = self.xyzw
+        return UnitQuaternion.from_unit_xyzw(
+            (x / norm, y / norm, z / norm, w / norm))
+
+    @property
+    def norm(self):
+        x, y, z, w = self.xyzw
+        return _math.sqrt(x**2 + y**2 + z**2 + w**2)
+
     @property
     def xyzw(self):
         return *self.vector, self.scalar
