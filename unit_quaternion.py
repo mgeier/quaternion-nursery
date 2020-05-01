@@ -32,6 +32,10 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
         """Disable inherited concatenation operator."""
         return NotImplemented
 
+    def __neg__(self):
+        x, y, z = self.vector
+        return super().__new__(type(self), -self.scalar, (-x, -y, -z))
+
     def conjugate(self):
         x, y, z = self.vector
         return super().__new__(type(self), self.scalar, (-x, -y, -z))
@@ -41,6 +45,9 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
         x, y, z, w = self.xyzw
         return UnitQuaternion.from_unit_xyzw(
             (x / norm, y / norm, z / norm, w / norm))
+
+    def dot(self, other):
+        return sum(map(_math.prod, zip(self.xyzw, other.xyzw)))
 
     @property
     def norm(self):
@@ -126,3 +133,19 @@ def slerp(one, two, t):
 
     """
     return (two * one.inverse())**t * one
+
+
+def canonicalize_quaternion_sequence(seq):
+    seq = iter(seq)
+    for p in seq:
+        if p.scalar < 0:
+            p = -p
+        break
+    else:
+        return
+    yield p
+    for q in seq:
+        if p.dot(q) < 0:
+            q = -q
+        yield q
+        p = q
