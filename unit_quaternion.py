@@ -1,10 +1,33 @@
-from collections import namedtuple as _namedtuple
 import math as _math
 
 
-class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
+class Quaternion:
 
-    __slots__ = ()
+    __slots__ = '_scalar', '_vector'
+
+    def __new__(cls, scalar, vector):
+        obj = super().__new__(cls)
+        obj._scalar = scalar
+        x, y, z = vector
+        obj._vector = x, y, z
+        return obj
+
+    @property
+    def scalar(self):
+        return self._scalar
+
+    @property
+    def vector(self):
+        return self._vector
+
+    def __repr__(self):
+        name = type(self).__name__
+        return f'{name}(scalar={self.scalar}, vector={self.vector})'
+
+    def __eq__(self, other):
+        if not isinstance(other, Quaternion):
+            return NotImplemented
+        return self.xyzw == other.xyzw
 
     def __mul__(self, other):
         if not isinstance(other, Quaternion):
@@ -17,7 +40,7 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
         b1, c1, d1 = self.vector
         a2 = other.scalar
         b2, c2, d2 = other.vector
-        return super().__new__(
+        return Quaternion.__new__(
             result_type,
             # TODO: properly derive this
             a1*a2 - b1*b2 - c1*c2 - d1*d2,
@@ -34,11 +57,11 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
 
     def __neg__(self):
         x, y, z = self.vector
-        return super().__new__(type(self), -self.scalar, (-x, -y, -z))
+        return Quaternion.__new__(type(self), -self.scalar, (-x, -y, -z))
 
     def conjugate(self):
         x, y, z = self.vector
-        return super().__new__(type(self), self.scalar, (-x, -y, -z))
+        return Quaternion.__new__(type(self), self.scalar, (-x, -y, -z))
 
     def normalize(self):
         norm = self.norm
@@ -56,18 +79,20 @@ class Quaternion(_namedtuple('QuaternionBase', 'scalar vector')):
 
     @property
     def xyzw(self):
-        return *self.vector, self.scalar
+        x, y, z = self.vector
+        return x, y, z, self.scalar
 
     @property
     def wxyz(self):
-        return self.scalar, *self.vector
+        x, y, z = self.vector
+        return self.scalar, x, y, z
 
 
 class UnitQuaternion(Quaternion):
 
     __slots__ = ()
 
-    def __new__(cls):
+    def __new__(cls, *args, **kwargs):
         raise TypeError('Use UnitQuaternion.from_*() to create a UnitQuaternion')
 
     @classmethod
