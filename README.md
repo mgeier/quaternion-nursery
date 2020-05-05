@@ -82,7 +82,8 @@ rotation axis multiplied by angle?
 Python Libs
 -----------
 
-https://github.com/moble/quaternion (dtype=quaternion)
+https://github.com/moble/quaternion (dtype=quaternion,
+has `quaternion.quaternion_time_series.squad()`)
 
 https://quaternion.readthedocs.io/en/latest/README.html
 
