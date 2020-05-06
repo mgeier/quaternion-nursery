@@ -134,6 +134,14 @@ class UnitQuaternion(Quaternion):
     # TODO: exponential map
     # TODO: logarithmic map
 
+    def log(self):
+        length = self.angle / 2
+        if self.scalar == 1:
+            return 0, 0, 0
+        x, y, z = self.axis
+        # TODO: return Quaternion?
+        return x * length, y * length, z * length
+
     @property
     def axis(self):
         assert self.scalar <= 1
