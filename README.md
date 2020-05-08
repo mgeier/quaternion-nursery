@@ -79,6 +79,12 @@ Or is it the same?
 exponential map?
 rotation axis multiplied by angle?
 
+angular rate = angular velocity?
+
+angular rate vector \omega
+
+derivative of q = q * \omega / 2
+
 Python Libs
 -----------
 
