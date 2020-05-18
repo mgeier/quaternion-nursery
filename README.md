@@ -85,6 +85,15 @@ angular rate vector \omega
 
 derivative of q = q * \omega / 2
 
+angular velocity links:
+
+https://stackoverflow.com/questions/46908345/integrate-angular-velocity-as-quaternion-rotation
+
+https://physics.stackexchange.com/questions/286/how-is-it-that-angular-velocities-are-vectors-while-rotations-arent
+
+https://en.wikipedia.org/wiki/Angular_velocity
+
+
 Python Libs
 -----------
 
