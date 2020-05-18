@@ -1,6 +1,9 @@
 import math as _math
 
 
+from splines import _check_param
+
+
 class Quaternion:
 
     __slots__ = '_scalar', '_vector'
@@ -182,3 +185,54 @@ def canonicalize_quaternion_sequence(seq):
             q = -q
         yield q
         p = q
+
+
+class BezierSpline:
+
+    def __init__(self, segments, grid=None):
+        if len(segments) < 1:
+            raise ValueError('There must be at least one segment')
+        self.segments = segments
+        if grid is None:
+            # uniform parameterization
+            grid = range(len(segments) + 1)
+        self.grid = list(grid)
+
+    def evaluate(self, t):
+        if not _np.isscalar(t):
+            return _np.array([self.evaluate(t) for t in t])
+        t, segment = self._select_segment_and_normalize_t(t)
+        return slerp(*_reduce(segment, t), t)
+
+    def evaluate_velocity(self, t):
+        if not _np.isscalar(t):
+            return _np.array([self.evaluate_velocity(t) for t in t])
+        t, segment = self._select_segment_and_normalize_t(t)
+        one, two = _reduce(segment, t)
+        x, y, z = (two * one.inverse()).log()
+        degree = len(segment) - 1
+        # NB: twice the angle
+        return x * 2 * degree, y * 2 * degree, z * 2 * degree
+
+    def _select_segment_and_normalize_t(self, t):
+        idx = _check_param('t', t, self.grid)
+        t0, t1 = self.grid[idx:idx + 2]
+        t = (t - t0) / (t1 - t0)
+        return t, self.segments[idx]
+
+        
+def _reduce(segment, t):
+    """Obtain two quaternions for the last step of the algorithm.
+
+    Recursively applies `slerp()` to neighboring control quaternions
+    until only two are left.
+
+    """
+    if len(segment) < 2:
+        raise ValueError('Segment must have at least two quaternions')
+    if len(segment) == 2:
+        return segment
+    return _reduce([
+        slerp(one, two, t)
+        for one, two in zip(segment, segment[1:])
+    ])
