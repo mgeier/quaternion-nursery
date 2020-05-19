@@ -1,6 +1,6 @@
 import math as _math
 
-
+import numpy as _np
 from splines import _check_param
 
 
@@ -235,4 +235,4 @@ def _reduce(segment, t):
     return _reduce([
         slerp(one, two, t)
         for one, two in zip(segment, segment[1:])
-    ])
+    ], t)
