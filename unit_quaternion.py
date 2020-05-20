@@ -134,10 +134,13 @@ class UnitQuaternion(Quaternion):
     # TODO: proper implementation to get meaningful docstring?
     inverse = Quaternion.conjugate
 
-    # TODO: exponential map
-    # TODO: logarithmic map
+    @classmethod
+    def exp_map(cls, value):
+        x, y, z = value
+        norm = _math.sqrt(x**2 + y**2 + z**2)
+        return cls.from_axis_angle((x, y, z), norm * 2)
 
-    def log(self):
+    def log_map(self):
         length = self.angle / 2
         if self.scalar == 1:
             return 0, 0, 0
@@ -209,7 +212,7 @@ class BezierSpline:
             return _np.array([self.evaluate_velocity(t) for t in t])
         t, segment = self._select_segment_and_normalize_t(t)
         one, two = _reduce(segment, t)
-        x, y, z = (two * one.inverse()).log()
+        x, y, z = (two * one.inverse()).log_map()
         degree = len(segment) - 1
         # NB: twice the angle
         return x * 2 * degree, y * 2 * degree, z * 2 * degree
