@@ -2,6 +2,7 @@ from functools import partial
 from math import radians
 
 import matplotlib
+from matplotlib.animation import FuncAnimation
 from matplotlib.colors import LightSource
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D, proj3d
@@ -99,6 +100,61 @@ def create_collection(ax):
     return coll
 
 
+def plot_rotation(rot, ax=None, ls=None):
+    if ax is None:
+        ax = plt.gca(projection='dumb3d')
+    # TODO: get size from faces? max distance from origin?
+    size = 12
+    _, _, x1, y1 = ax.bbox.bounds
+    aspect = x1 / y1
+    if x1 > y1:
+        # landscape
+        height = size
+        width = height * aspect
+    else:
+        width = size
+        height = width / aspect
+    ax.set_xlim(-width / 2, width / 2)
+    ax.set_ylim(-height / 2, height / 2)
+    coll = create_collection(ax)
+    if ls is None:
+        ls = LightSource()
+    polys, facecolors = create_polys(rot, ls=ls)
+    coll.set_verts(polys)
+    coll.set_facecolors(facecolors)
+    return coll
+
+
+def prepare_figure(titles='', **kwargs):
+    if isinstance(titles, str):
+        titles = [titles]
+    fig, (axs,) = plt.subplots(
+        ncols=len(titles),
+        squeeze=False,
+        subplot_kw=dict(projection='dumb3d'),
+        **kwargs)
+    plt.close(fig)
+    collections = []
+    for ax, title in zip(axs, titles):
+        # TODO: separate re-usable function
+        size = 12
+        _, _, x1, y1 = ax.bbox.bounds
+        aspect = x1 / y1
+        if x1 > y1:
+            # landscape
+            height = size
+            width = height * aspect
+        else:
+            width = size
+            height = width / aspect
+        ax.set_xlim(-width / 2, width / 2)
+        ax.set_ylim(-height / 2, height / 2)
+        collections.append(create_collection(ax))
+        ax.set_title(title)
+    return collections
+
+
+# TODO: rename, something with "row"?
 def prepare_axis(n, *, ax=None):
     """
 
@@ -121,6 +177,17 @@ def prepare_axis(n, *, ax=None):
     return [(create_collection(ax), [x + i * shift_x, y, z]) for i in range(n)]
 
 
+def update_collections(collections, rotations, *, ls=None):
+    if ls is None:
+        ls = LightSource()
+    for coll, rot in zip(collections, rotations):
+        polys, facecolors = create_polys(rot, ls=ls)
+        coll.set_verts(polys)
+        coll.set_facecolors(facecolors)
+    return collections
+
+
+# TODO: rename, something with "row"?
 def update_plot(collections_and_offsets, rotations, *, ls=None):
     if ls is None:
         ls = LightSource()
@@ -141,11 +208,26 @@ def plot_rotations(rotations, *, ax=None):
     return collections
 
 
+def animate_rotations(rotations, figsize=None, **kwargs):
+    if not isinstance(rotations, dict):
+        rotations = {'': rotations}
+    collections = prepare_figure(rotations.keys(), figsize=figsize)
+
+    def ani_func(rot):
+        return update_collections(collections, rot)
+
+    return FuncAnimation(
+        collections[0].axes.figure,
+        ani_func,
+        frames=list(zip(*rotations.values())),
+        **kwargs)
+
+
 class DumbAxes3D(Axes3D):
 
     name = 'dumb3d'
 
-    def __init__(self, figure, rect=[0, 0, 1, 1], sharex=None, sharey=None):
+    def __init__(self, figure, rect=None, sharex=None, sharey=None):
         if sharex is not None:
             raise TypeError('sharex not supported')
         if sharey is not None:
@@ -182,6 +264,8 @@ class DumbAxes3D(Axes3D):
         super(Axes3D, self).draw(renderer)
 
     def apply_aspect(self, position=None):
+        # This seems to be broken in Axes3D,
+        # see https://github.com/matplotlib/matplotlib/issues/16463
         super(Axes3D, self).apply_aspect(position=position)
 
 
