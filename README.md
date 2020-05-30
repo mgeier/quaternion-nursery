@@ -265,7 +265,7 @@ ordinary B-splines and straight lines (Duff 1986).
 Already three algorithms have been proposed to
 spline quaternions: a Bezier interpolation scheme
 by Ken Shoemake (1985), a B-spline interpolation
-scheme by T o m Duff (1986) and a Boehm quad-
+scheme by Tom Duff (1986) and a Boehm quad-
 rangle spline by Ken Shoemake (1987).
 
 [approximation by repeated subdivision with t=0.5?]
@@ -485,14 +485,14 @@ that must compute and optimize or integrate along fixed orientation curves.
 It does not aid greatly in differential control or optimization over the curve
 shape itself, since it provides no correspondingly simple method for differen-
 tiating the curve with respect to the quaternion control points. Even if it
-did we would st ill face the inconveniences described in the preceding para-
+did we would still face the inconveniences described in the preceding para-
 graphs. Nevertheless, the ability to specify closed-form Hermite curves on
 S3 by quaternion keys and angular velocities at the keys seems promising for
 use in keyframe animation systems, given suitable methods for visualizing the
 quaternion curves.
 
-Given that we a re interest ed in paramet erizing a three-DOF rot ation ,
-we would like a paramet erization emb edded in R3 that is free of gimbal lock
+Given that we are interested in parameterizing a three-DOF rotation,
+we would like a parameterization embedded in R3 that is free of gimbal lock
 and interpolates rotations well using Euclidean interpolants such as cubic
 splines. This goal is, of course, unrealizable, as it is a standard exercise in
 topology to show that R3 cannot be mapped into S0(3) without singularities,
@@ -508,7 +508,7 @@ map can be computed robustly even in the neighborhood of the origin: [...]
 Hussein Yahia and Andre Gagalowicz.
 "Interactive Animation of Object Orientations."
 In Proceedings of the 2nd International Conference. Pixim 89.
-pp. 265-75 (September 1989) .
+pp. 265-75 (September 1989).
 
 [regarding Hanotaux and Peroche 1993:]
 Hanotaux
@@ -775,7 +775,7 @@ struction, however, does not seem to generalize in a natural
 way to the Riemannian setting. Although tangency between
 curves is well-defined, the notion of an osculating plane relies
 inherently on the manifold being embedded in some larger
-ambient Euchdean space, and in general there exist several
+ambient Euclidean space, and in general there exist several
 differnt ways to do this. It is also more desirable to define a
 Bezier curve in terms of the intrinsic geometry of the manifold,
 rather than the underlying space in which it lies. For Rieman-
@@ -785,14 +785,14 @@ for certain manifolds the minimal geodesic between two points
 may not always be unique, so that a number of subtleties
 (addressed below) will arise.
 
-It is clear that constructing Bdzier curves on Riemannian
+It is clear that constructing Bezier curves on Riemannian
 manifolds by this algorithm is computationally more involved
 than for the Euclidean case: computing the geodesic between
-any two points involves the solution of the nonUnear differ-
+any two points involves the solution of the nonlinear differ-
 ential equation (1), a two-point boundary value problem (and
 therefore more difficult than integrating a differential equation
 with only initial conditions). Even if we assume that the geo-
-desies forming the control polygon have been precomputed
+desics forming the control polygon have been precomputed
 and stored in a table, for each instant t the geodesic equations
 still need to be solved (n-1)(n-2)/2 times. Clearly this
 presents difficulties for interactive design applications.
@@ -830,7 +830,7 @@ the antipodal points identified
 
 Hence, given a particular left- or right-invariant Riemannian
 metric on SE(3), the corresponding Bezier curve can be con-
-structed by combining the appropriate B6zier curves in (R^ and
+structed by combining the appropriate Bezier curves in (R^ and
 SO(3). From a physical viewpoint this is more appealing, since
 there is nothing natural about the screw motions from the
 point of view of dynamics.
