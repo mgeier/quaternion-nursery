@@ -1,6 +1,10 @@
 Quaternion Notes
 ================
 
+quaternions: non-commutative division ring
+
+division ring = skew field
+
 Andrew J. Hanson:
 Visualizing Quaternions
 
@@ -1037,4 +1041,90 @@ Computing the geodesic path connecting two rotations does not require a quaterni
 possible to compute it using a matrix representation and the exponential map for rotations as the Lie Group
 SO(3).
 
+---
 
+Kim, Kim, Shin 1995:
+A C2-continuous B-spline Quaternion Curve
+Interpolating a Given Sequence of Solid Orientations
+
+[no local control?!?]
+
+C2-continuous B-spline quaternion curve which interpo-
+lates a given sequence of unit quaternions
+
+The de Casteljau type construction
+method of B-spline curves can be extended to generate
+B-spline quaternion curves [Schlag 1992]; however, the B-spline
+quaternion curves do not have C2-continuity in SO(3).
+
+The authors [7] recently suggested a new construc-
+tion method that can extend a B-spline curve to a simi-
+lar one i n SO(3) while preserving the Ck-continuity of
+the B-spline curve. We adapt this method f o r the con-
+struction of a B-spline quaternion interpolation curve.
+Thus, the problem essentially reduces to the problem of
+finding the control points for the B-spline znterpolation
+curve. However, due to the non-linearity of the associ-
+ated constraint equations, it i s non-trivial t o compute
+the B-spline control points. We provide an eficient it-
+erative refinement solution which can approximate the
+control points very preciesly.
+
+Many of the previous results are based on the recur-
+sive constructions of geodesic great circular arcs in S3
+
+Some of recent results are based on the
+construction of circular arcs in S3
+
+There are only a few C2-continuous quaternion
+curves. Pletincks [12] constructed quaternion curves
+by generating curve mid points recursively. The gen-
+erated curves are extremely smooth since they con-
+verge to infinite degree curves. However, they have
+no closed form equations. Furthermore, the method
+always generates (2' - 1) in-betweens (for some inte-
+ger i > 0 ) , which is a serious drawback for keyframe
+animation systems.
+
+Kim and Nam [9] constructed a
+Ck-continuous quaternion curve by blending two cir-
+cular arcs in S3 with a high degree blending function
+of degree 2k - 1. Though a high degree blending can
+eliminate the C2-discontinuity at the curve joints, the
+global smoothness of the whole curve is somewhat dif-
+ficult to be achieved in this method.
+
+It is required to
+have the generalization of B-spline curves which have
+extreme smoothness in the overall curve shapes.
+
+Nielson and Heiland [11] assumed
+the geometric properties which are not true in general
+for the quaternion curves in S3. Thus, the constructed
+B-spline quaternion curve is not C2-continuous.
+
+An iterative method to compute
+the solution can be formulated as follows ...
+
+However, due to the non-linearity of the prob-
+lem, there are some restrictions for the input values of
+Qi’s so that the convergence of the iterative method
+is guaranteed.
+
+Note that the key distance 1.4 ra-
+dian is sufficient for most applications in practice; this
+is because 1.4 radian in S3 is 2.8 radian in the real
+world, which allows quite large key distances. When
+some key distances are larger than 2.8 radian, the an-
+imator may need to introduce some more additional
+keyframes between the two keyframes.
+
+The order of quater-
+nion multiplications is extremely confusing.
+The rule
+is that the next rotation is multiplied to the left of the
+previous rotation if the rotation is done in the global
+frame, and to the right of the previous rotation if it is
+done in the local frame.
+
+The quaternion exponential is a many-to-1 function.
