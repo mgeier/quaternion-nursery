@@ -106,15 +106,10 @@ class UnitQuaternion(Quaternion):
         *angle* in radians.
 
         """
-        # TODO: implement with exponential map?
         x, y, z = axis
         norm = _math.sqrt(x**2 + y**2 + z**2)
-        s = _math.sin(angle / 2)
-        return super().__new__(
-            cls,
-            _math.cos(angle / 2),
-            (s * x / norm, s * y / norm, s * z / norm),
-        )
+        s = angle / (2 * norm)
+        return cls.exp_map((s * x, s * y, s * z))
 
     @classmethod
     def from_unit_xyzw(cls, xyzw):
@@ -138,14 +133,18 @@ class UnitQuaternion(Quaternion):
     def exp_map(cls, value):
         x, y, z = value
         norm = _math.sqrt(x**2 + y**2 + z**2)
-        return cls.from_axis_angle((x, y, z), norm * 2)
+        if norm == 0:
+            zero, one = norm, norm + 1  # to get appropriate numeric types
+            return super().__new__(cls, one, (zero, zero, zero))
+        s = _math.sin(norm) / norm
+        return super().__new__(cls, _math.cos(norm), (s * x, s * y, s * z))
 
     def log_map(self):
         length = self.angle / 2
         if self.scalar == 1:
-            return 0, 0, 0
+            zero = 0 * self.scalar  # to get appropriate numeric type
+            return zero, zero, zero
         x, y, z = self.axis
-        # TODO: return Quaternion?
         return x * length, y * length, z * length
 
     @property
