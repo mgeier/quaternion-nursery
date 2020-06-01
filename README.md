@@ -387,6 +387,10 @@ The two (i.e., algebraic and geometric) construction schemes
 generate identical curves in R3; however, this is not the case in
 the non-Euclidean space SO (3) [Kim, Kim, Shin 1995 (A C2 ...)].
 
+When the recursive curve construction is not based on a simple
+closed form algebraic equation, it becomes extremely difficult to
+do any extensive analysis on the constructed curve.
+
 Though Shoemake [1985, 1991] postulates
 correct first derivatives, the quaternion calculus employed there
 is incorrect (see [Kim, Kim, Shin 1995 (A compact ...)] for more details).
