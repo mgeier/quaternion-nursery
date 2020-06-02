@@ -431,6 +431,37 @@ cumulative basis functions
 This Bézier quaternion curve has a different
 shape from the Bézier quaternion curve of Shoemake (1985)
 
+[5.2 Hermite Quaternion Curve:]
+Note that we can assign
+arbitrarily large angular velocities at the curve end points. The
+angular velocity \omega 2 provides an extra degree of freedom in choos-
+ing the number n of revolutions while not losing the end point
+interpolation property.
+
+[5.3 B-Spline:]
+The B-spline quater-
+nion curve also allows arbitrarily large angular velocities between
+two consecutive control points {q_i}.
+
+[6.1 Torque]
+Most of the previous
+results on quaternion interpolation have concentrated on improving
+the computational efficiency rather than attacking the more chal-
+lenging problem of energy minimization.
+
+Barr et al. [1992] took an important step toward the energy min-
+imization. The quaternion path is approximated by discrete unit
+quaternions and a time-consuming non-linear optimization is em-
+ployed in the algorithm
+
+Our quaternion curves do not suffer from such a degener-
+acy.
+... may accommodate arbitrarily large angular velocity ...
+The resulting curve has a large number of winding; however,
+the curve does not produce extraordinary bending and/or twisting.
+Therefore, our curves perform much better when the angular varia-
+tions are large.
+
 ---
 
 Kim, Kim, Shin 1996:
