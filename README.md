@@ -492,6 +492,9 @@ Shoemake 1991
 Kim, Nam 1993, 1994
 Hanotaux and Peroche 1993
 
+This fact shows that Hanotaux and Peroche (1993) do not generate an exact
+Hermite interpolation quaternion curve ...
+
 ---
 
 Kim, Nam 1995:
