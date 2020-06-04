@@ -476,6 +476,16 @@ Boehm (1982) quadrangle to S3.
 Unfortunately, Shoemake misinterpreted the meaning of dq, which is
 the differential q'(t), as the logarithm logq.
 
+... Using this formula, we can easily show that the claims of Shoemake
+on the quaternion curve differentials actually hold at the curve end points.
+
+It is also easy
+to prove that Hanotaux and Peroche do not generate a Hermite quaternion curve which
+interpolates two given boundary angular velocities exactly
+
+However, the differential formula of this paper is only useful
+for the first derivative of a unit quaternion curve.
+
 derivation of q'(0) for previous papers:
 Shoemake 1985
 Shoemake 1991
