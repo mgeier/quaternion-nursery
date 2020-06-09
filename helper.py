@@ -264,9 +264,7 @@ class DumbAxes3D(Axes3D):
         super(Axes3D, self).draw(renderer)
 
     def apply_aspect(self, position=None):
-        # This seems to be broken in Axes3D,
-        # see https://github.com/matplotlib/matplotlib/issues/16463
-        super(Axes3D, self).apply_aspect(position=position)
+        pass
 
 
 matplotlib.projections.register_projection(DumbAxes3D)
