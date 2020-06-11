@@ -569,6 +569,18 @@ R3 is not, in general, equivalent to the geodesic between the two orientations
 in S3, but that "the approximation is not far from optimal." In fact the approximation can be quite far from optimal--quantifying how far is an open
 question, but in general the error increases the further the two axes of rotation diverge from parallel.
 
+... in general only one of the infinitely many mappings
+of r2 into R3 will approximate the geodesic in S3 ...
+The procedure followed by Yahia ... does not suffice.
+A log
+mapping that does guarantee the geodesic approximation picks the mapping
+for each successive key that minimizes the Euclidean distance to the mapping
+of the previous key.
+
+Given such a log map that considers the previous mapping when calculating
+the current mapping, the results of interpolating in S3 and R3 may be visually
+indistinguishable for many applications, including keyframing.
+
 However, representing three-DOF rotation functions in R3 is fraught with
 peril because whenever the curve crosses one of the singularity shells discussed
 in Section 3.2.1, some of the derivatives disappear.
