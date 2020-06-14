@@ -971,11 +971,13 @@ This paper presents a method for design-
 ing spherical curves by two weighted spa-
 tial rotations.
 
-The de-
-signed curves have the following features:
-C 1 continuity, local control, and invari-
-ance under orthogonal transformations of
+The designed curves have the following features:
+C1 continuity, local control, and invariance under orthogonal transformations of
 coordinate systems.
+
+If a quaternion q [...] is known then
+elements of an orientation matrix can be obtained
+as follows (Nielson 1992): [...]
 
 ---
 
@@ -1188,3 +1190,41 @@ frame, and to the right of the previous rotation if it is
 done in the local frame.
 
 The quaternion exponential is a many-to-1 function.
+
+---
+
+Pobegailo 1996
+Cn interpolation on smooth
+manifolds with one-parameter
+transformations
+
+A comparison with a closely related
+method [Kim, Nam] will be made in the section concerning
+interpolation of orientations.
+
+[ too crazy ]
+
+---
+
+Pobegailo 2013
+CONSTRUCTION OF SMALL CIRCULAR ARCS ON A SPHERE OF UNIT QUATERNIONS
+
+This article presents an algorithm for construction of a small circular arc on a sphere of
+unit quaternions. The small circular arc is defined by three points lying on the sphere. The
+algorithm can be used for animating rotation trajectories of rigid objects in computer graphics.
+
+The new approach presented in
+this article is that the transition to the three-
+dimensional space is implicit and inherent to
+the algorithm.
+
+---
+
+Pobegailo 2015
+Construction of spline curves on smooth manifolds by action of Lie groups
+
+[???]
+
+---
+
+
