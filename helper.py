@@ -85,7 +85,7 @@ def create_polys(rot, *, ls=None):
     return polys, facecolors
 
 
-def create_collection(ax):
+def create_empty_collection(ax):
     alpha = 1
     linewidth = 0.5
     edgecolor = 'black'
@@ -103,7 +103,6 @@ def create_collection(ax):
 def plot_rotation(rot, ax=None, ls=None):
     if ax is None:
         ax = plt.gca(projection='dumb3d')
-    # TODO: get size from faces? max distance from origin?
     size = 12
     _, _, x1, y1 = ax.bbox.bounds
     aspect = x1 / y1
@@ -116,7 +115,7 @@ def plot_rotation(rot, ax=None, ls=None):
         height = width / aspect
     ax.set_xlim(-width / 2, width / 2)
     ax.set_ylim(-height / 2, height / 2)
-    coll = create_collection(ax)
+    coll = create_empty_collection(ax)
     if ls is None:
         ls = LightSource()
     polys, facecolors = create_polys(rot, ls=ls)
@@ -149,7 +148,7 @@ def prepare_figure(titles='', **kwargs):
             height = width / aspect
         ax.set_xlim(-width / 2, width / 2)
         ax.set_ylim(-height / 2, height / 2)
-        collections.append(create_collection(ax))
+        collections.append(create_empty_collection(ax))
         ax.set_title(title)
     return collections
 
@@ -174,7 +173,9 @@ def prepare_axis(n, *, ax=None):
     x = object_width / 2
     y = total_height / 2
     z = 0
-    return [(create_collection(ax), [x + i * shift_x, y, z]) for i in range(n)]
+    return [
+        (create_empty_collection(ax), [x + i * shift_x, y, z])
+        for i in range(n)]
 
 
 def update_collections(collections, rotations, *, ls=None):
