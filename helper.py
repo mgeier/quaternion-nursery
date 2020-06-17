@@ -1,3 +1,4 @@
+"""Helper functions for plotting rotations."""
 from functools import partial
 from math import radians
 
@@ -100,9 +101,7 @@ def create_empty_collection(ax):
     return coll
 
 
-def plot_rotation(rot, ax=None, ls=None):
-    if ax is None:
-        ax = plt.gca(projection='dumb3d')
+def prepare_axes(ax):
     size = 12
     _, _, x1, y1 = ax.bbox.bounds
     aspect = x1 / y1
@@ -115,7 +114,13 @@ def plot_rotation(rot, ax=None, ls=None):
         height = width / aspect
     ax.set_xlim(-width / 2, width / 2)
     ax.set_ylim(-height / 2, height / 2)
-    coll = create_empty_collection(ax)
+    return create_empty_collection(ax)
+
+
+def plot_rotation(rot, ax=None, ls=None):
+    if ax is None:
+        ax = plt.gca(projection='dumb3d')
+    coll = prepare_axes(ax)
     if ls is None:
         ls = LightSource()
     polys, facecolors = create_polys(rot, ls=ls)
@@ -135,47 +140,9 @@ def prepare_figure(titles='', **kwargs):
     plt.close(fig)
     collections = []
     for ax, title in zip(axs, titles):
-        # TODO: separate re-usable function
-        size = 12
-        _, _, x1, y1 = ax.bbox.bounds
-        aspect = x1 / y1
-        if x1 > y1:
-            # landscape
-            height = size
-            width = height * aspect
-        else:
-            width = size
-            height = width / aspect
-        ax.set_xlim(-width / 2, width / 2)
-        ax.set_ylim(-height / 2, height / 2)
-        collections.append(create_empty_collection(ax))
+        collections.append(prepare_axes(ax))
         ax.set_title(title)
     return collections
-
-
-# TODO: rename, something with "row"?
-def prepare_axis(n, *, ax=None):
-    """
-
-    Returns collections together with their offsets.
-
-    """
-    if ax is None:
-        ax = plt.gca(projection='dumb3d')
-    object_width = 12
-    shift_x = object_width
-    _, _, x1, y1 = ax.bbox.bounds
-    aspect = x1 / y1
-    total_width = object_width * n
-    total_height = total_width / aspect
-    ax.set_xlim(0, total_width)
-    ax.set_ylim(0, total_height)
-    x = object_width / 2
-    y = total_height / 2
-    z = 0
-    return [
-        (create_empty_collection(ax), [x + i * shift_x, y, z])
-        for i in range(n)]
 
 
 def update_collections(collections, rotations, *, ls=None):
@@ -188,25 +155,29 @@ def update_collections(collections, rotations, *, ls=None):
     return collections
 
 
-# TODO: rename, something with "row"?
-def update_plot(collections_and_offsets, rotations, *, ls=None):
+def plot_rotations(rotations, *, ax=None, ls=None):
+    if ax is None:
+        ax = plt.gca(projection='dumb3d')
+    object_width = 12
+    shift_x = object_width
+    _, _, x1, y1 = ax.bbox.bounds
+    aspect = x1 / y1
+    total_width = object_width * len(rotations)
+    total_height = total_width / aspect
+    ax.set_xlim(0, total_width)
+    ax.set_ylim(0, total_height)
+    x = object_width / 2
+    y = total_height / 2
+    z = 0
     if ls is None:
         ls = LightSource()
-    collections = []
-    for (coll, offset), rot in zip(collections_and_offsets, rotations):
+    for i, rot in enumerate(rotations):
+        coll = create_empty_collection(ax)
+        offset = [x + i * shift_x, y, z]
         polys, facecolors = create_polys(rot, ls=ls)
         polys += offset
         coll.set_verts(polys)
         coll.set_facecolors(facecolors)
-        collections.append(coll)
-    return collections
-
-
-def plot_rotations(rotations, *, ax=None):
-    collections = prepare_axis(len(rotations), ax=ax)
-    ls = LightSource()
-    collections = update_plot(collections, rotations, ls=ls)
-    return collections
 
 
 def animate_rotations(rotations, figsize=None, **kwargs):
