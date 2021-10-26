@@ -1,6 +1,19 @@
 Quaternion Notes
 ================
 
+This repository contains a few notes and experiments that have served as a starting point
+for developing the "rotation" section of the `splines` project, see
+https://splines.readthedocs.io/rotation/ and
+https://github.com/AudioSceneDescriptionFormat/splines/.
+
+This repository will probably not be updated anymore,
+but maybe some more content from here will be moved over
+to the `splines` project.
+
+If you have any questions, feel free to open an issue in either of the repositories.
+
+----
+
 quaternions: non-commutative division ring
 
 division ring = skew field
